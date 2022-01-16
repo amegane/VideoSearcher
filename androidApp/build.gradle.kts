@@ -8,6 +8,7 @@ val lifecycleVersion: String by project
 val activityComposeVersion: String by project
 val accompanistVersion: String by project
 val realmVersion: String by project
+val koinVersion: String by project
 
 plugins {
     id("com.android.application")
@@ -43,4 +44,5 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion")
     implementation("androidx.activity:activity-compose:$activityComposeVersion")
     implementation("com.google.accompanist:accompanist-insets:$accompanistVersion")
+    implementation("io.insert-koin:koin-core:$koinVersion")
 }

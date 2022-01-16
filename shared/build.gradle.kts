@@ -1,8 +1,12 @@
 val kotlinVersion: String by project
 val kotlinSerializationVersion: String by project
+val lifecycleVersion: String by project
 val realmVersion: String by project
 val ktorVersion: String by project
+val koinVersion: String by project
+val reaktiveVersion: String by project
 val junitVersion: String by project
+val mockkVersion: String by project
 
 plugins {
     kotlin("multiplatform")
@@ -39,6 +43,8 @@ kotlin {
                 implementation("io.ktor:ktor-client-core:$ktorVersion")
                 implementation("io.ktor:ktor-client-logging:$ktorVersion")
                 implementation("io.ktor:ktor-client-serialization:$ktorVersion")
+                implementation("io.insert-koin:koin-core:$koinVersion")
+                implementation("com.badoo.reaktive:reaktive:$reaktiveVersion")
             }
         }
         val commonTest by getting {
@@ -49,6 +55,7 @@ kotlin {
         }
         val androidMain by getting {
             dependencies {
+                implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion")
                 implementation("io.ktor:ktor-client-android:$ktorVersion")
                 implementation("io.ktor:ktor-client-okhttp:$ktorVersion")
             }
@@ -57,6 +64,8 @@ kotlin {
             dependencies {
                 implementation(kotlin("test-junit"))
                 implementation("junit:junit:$junitVersion")
+                implementation("io.mockk:mockk:$mockkVersion")
+                implementation("androidx.arch.core:core-testing:2.1.0")
             }
         }
 //        val iosX64Main by getting

@@ -14,6 +14,7 @@ buildscript {
     val realmVersion by extra("0.7.0")
     val ktorVersion by extra("1.6.7")
     val koinVersion by extra("3.1.4")
+    var reaktiveVersion by extra("1.2.1")
     val junitVersion by extra("4.13.2")
     val junitExtVersion by extra("1.1.3")
     val mockkVersion by extra("1.12.0")
