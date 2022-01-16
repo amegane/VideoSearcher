@@ -1,3 +1,3 @@
 package com.amegane3231.moviesearch.flux.core
 
-abstract class ActionEvent
+interface Action
