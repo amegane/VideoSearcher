@@ -3,6 +3,7 @@
     package="com.amegane3231.moviesearch.android">
 
     <application
+        android:name=".application.MovieSearchApp"
         android:allowBackup="false"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
