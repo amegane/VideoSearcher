@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.amegane3231.moviesearch.android">
+    package="com.amegane3231.videosearcher.android">
 
     <application
-        android:name=".application.MovieSearchApp"
+        android:name=".application.VideoSearcherApp"
         android:allowBackup="false"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
