@@ -14,6 +14,7 @@ plugins {
     kotlin("plugin.serialization")
     id("com.android.library")
     id("io.realm.kotlin") version "0.7.0"
+    id("org.jlleitschuh.gradle.ktlint") version "10.2.1"
 }
 
 version = "1.0"
@@ -99,4 +100,10 @@ android {
         minSdk = 26
         targetSdk = 31
     }
+}
+
+ktlint {
+    version.set("10.2.1")
+    android.set(true)
+    ignoreFailures.set(true)
 }
