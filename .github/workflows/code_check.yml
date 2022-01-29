@@ -28,8 +28,8 @@ jobs:
           bundle install
       - name: run ktlintCheck
         run:
-          chmod +x .//gradlew
-          .//gradlew ktlintCheck
+          chmod +x ./gradlew
+          ./gradlew ktlintCheck
       - name: run danger
         env:
           GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
