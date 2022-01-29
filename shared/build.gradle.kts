@@ -7,6 +7,7 @@ val koinVersion: String by project
 val reaktiveVersion: String by project
 val junitVersion: String by project
 val mockkVersion: String by project
+val ktlintVersion: String by project
 
 plugins {
     kotlin("multiplatform")
@@ -103,6 +104,9 @@ android {
 }
 
 ktlint {
-    version.set("10.2.1")
+    version.set(ktlintVersion)
+    reporters {
+        reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.CHECKSTYLE)
+    }
     ignoreFailures.set(true)
 }
