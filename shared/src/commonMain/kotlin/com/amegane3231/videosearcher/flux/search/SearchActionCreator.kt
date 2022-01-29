@@ -1,5 +1,6 @@
 package com.amegane3231.videosearcher.flux.search
 
+import com.amegane3231.videosearcher.data.search.SearchResult
 import com.amegane3231.videosearcher.flux.core.ActionCreator
 import com.amegane3231.videosearcher.flux.core.Dispatcher
 import com.amegane3231.videosearcher.usecase.SearchYoutubeUseCase
@@ -29,7 +30,7 @@ class SearchActionCreator : ActionCreator, CoroutineScope, KoinComponent {
                 }
                 .collect {
                     println(it)
-                    dispatcher.dispatch(SearchAction.FetchDataSucceeded(it))
+                    dispatcher.dispatch(SearchAction.FetchDataSucceeded(SearchResult.YoutubeData(it)))
                 }
         }
     }

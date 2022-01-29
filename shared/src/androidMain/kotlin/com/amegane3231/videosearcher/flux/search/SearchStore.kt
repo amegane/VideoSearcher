@@ -1,6 +1,7 @@
 package com.amegane3231.videosearcher.flux.search
 
 import androidx.lifecycle.ViewModel
+import com.amegane3231.videosearcher.data.search.SearchResult
 import com.amegane3231.videosearcher.flux.core.Dispatcher
 import com.amegane3231.videosearcher.flux.core.Store
 import com.badoo.reaktive.observable.subscribe
@@ -38,7 +39,7 @@ actual class SearchStore : Store, ViewModel(), CoroutineScope, KoinComponent {
         dispatcher.observer.subscribe(
             isThreadLocal = true,
             onNext = {
-                if (it is SearchAction) {
+                if (it is SearchAction.FetchDataSucceeded && it.data is SearchResult.YoutubeData) {
                     launch {
                         _youtubeData.emit(it)
                     }

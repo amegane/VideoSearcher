@@ -1,5 +1,6 @@
 package com.amegane3231.videosearcher
 
+import com.amegane3231.videosearcher.data.search.SearchResult
 import com.amegane3231.videosearcher.data.youtube.*
 import com.amegane3231.videosearcher.di.initKoin
 import com.amegane3231.videosearcher.flux.core.Dispatcher
@@ -221,7 +222,7 @@ class AndroidYoutubeAPITest {
             }
             io {
                 flow.collect {
-                    Dispatcher.dispatch(SearchAction.FetchDataSucceeded(it))
+                    Dispatcher.dispatch(SearchAction.FetchDataSucceeded(SearchResult.YoutubeData(it)))
                 }
             }
         }
