@@ -19,6 +19,7 @@ buildscript {
     val junitExtVersion by extra("1.1.3")
     val mockkVersion by extra("1.12.0")
     val espressoVersion by extra("3.4.0")
+    val ktlintVersion by extra("0.43.2")
 
     repositories {
         gradlePluginPortal()
