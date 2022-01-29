@@ -27,7 +27,9 @@ jobs:
           gem install bundler
           bundle install
       - name: run ktlintCheck
-        run: ./gradlew ktlintCheck
+        run:
+          chmod +x ./gradlew
+          ./gradlew ktlintCheck
       - name: run danger
         env:
           GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
