@@ -26,8 +26,6 @@ jobs:
         run: |
           gem install bundler
           bundle install
-      - name: run ktlintCheck
-        run: ./gradlew ktlintCheck
       - name: run danger
         env:
           GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
@@ -42,4 +40,6 @@ jobs:
         with:
           java-version: "11"
       - name: run ktlintCheck
-        run: ./gradlew ktlintCheck
+        run:
+          chmod +x ./gradlew
+          ./gradlew ktlintCheck
