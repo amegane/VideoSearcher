@@ -7,10 +7,14 @@ on:
   workflow_dispatch:
 
 jobs:
-  danger:
+  ktlint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Setup JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
       - name: Setup ruby
         uses: actions/setup-ruby@v1
         with:
@@ -20,19 +24,10 @@ jobs:
         run: |
           gem install bundler
           bundle install
+      - name: run ktlintCheck
+        run:
+          ./gradlew ktlintCheck
       - name: run danger
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: danger
-
-  ktlint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Setup JDK
-        uses: actions/setup-java@v1
-        with:
-          java-version: 11
-      - name: run ktlintCheck
-        run:
-          ./gradlew ktlintCheck
