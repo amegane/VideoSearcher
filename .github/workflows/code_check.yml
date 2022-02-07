@@ -4,8 +4,6 @@ on:
   pull_request:
     branches: [ master ]
 
-  workflow_dispatch:
-
 jobs:
   code_check:
     runs-on: ubuntu-latest
@@ -25,8 +23,7 @@ jobs:
           gem install bundler
           bundle install
       - name: run ktlintCheck
-        run:
-          ./gradlew ktlintCheck
+        run: ./gradlew ktlintCheck
       - name: run danger
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -8,3 +8,9 @@ Dir[ktlint_report_dir].each do |file_name|
     checkstyle_format.base_path = Dir.pwd
     checkstyle_format.report file_name
 end
+
+ktlint_shared_report_dir = 'shared/build/reports/ktlint/**/*.xml'
+Dir[ktlint_shared_report_dir].each do |file_name|
+    checkstyle_format.base_path = Dir.pwd
+    checkstyle_format.report file_name
+end
