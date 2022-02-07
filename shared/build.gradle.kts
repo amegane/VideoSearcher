@@ -7,6 +7,7 @@ val koinVersion: String by project
 val reaktiveVersion: String by project
 val junitVersion: String by project
 val mockkVersion: String by project
+val ktlintVersion: String by project
 
 plugins {
     kotlin("multiplatform")
@@ -14,6 +15,7 @@ plugins {
     kotlin("plugin.serialization")
     id("com.android.library")
     id("io.realm.kotlin") version "0.7.0"
+    id("org.jlleitschuh.gradle.ktlint")
 }
 
 version = "1.0"
@@ -99,4 +101,12 @@ android {
         minSdk = 26
         targetSdk = 31
     }
+}
+
+configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
+    version.set(ktlintVersion)
+    reporters {
+        reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.CHECKSTYLE)
+    }
+    ignoreFailures.set(true)
 }

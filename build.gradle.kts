@@ -19,16 +19,20 @@ buildscript {
     val junitExtVersion by extra("1.1.3")
     val mockkVersion by extra("1.12.0")
     val espressoVersion by extra("3.4.0")
+    val ktlintVersion by extra("0.42.1")
+    val ktlintGradleVersion by extra("10.2.1")
 
     repositories {
         gradlePluginPortal()
         google()
         mavenCentral()
+        maven(url = "https://plugins.gradle.org/m2/")
     }
     dependencies {
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
         classpath("org.jetbrains.kotlin:kotlin-serialization:$kotlinVersion")
         classpath("com.android.tools.build:gradle:$gradleVersion")
+        classpath("org.jlleitschuh.gradle:ktlint-gradle:$ktlintGradleVersion")
     }
 }
 
@@ -39,6 +43,16 @@ allprojects {
     }
 }
 
+apply(plugin = "org.jlleitschuh.gradle.ktlint")
+
 tasks.register("clean", Delete::class) {
     delete(rootProject.buildDir)
+}
+
+configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
+    version.set("0.42.1")
+    reporters {
+        reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.CHECKSTYLE)
+    }
+    ignoreFailures.set(true)
 }

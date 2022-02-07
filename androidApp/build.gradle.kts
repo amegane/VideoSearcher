@@ -18,7 +18,7 @@ plugins {
 android {
     compileSdk = 31
     defaultConfig {
-        applicationId = "com.amegane3231.moviesearch.android"
+        applicationId = "com.amegane3231.videosearcher.android"
         minSdk = 26
         targetSdk = 31
         versionCode = 1

@@ -6,6 +6,6 @@ pluginManagement {
     }
 }
 
-rootProject.name = "MovieSearch"
+rootProject.name = "videosearcher"
 include(":androidApp")
 include(":shared")
