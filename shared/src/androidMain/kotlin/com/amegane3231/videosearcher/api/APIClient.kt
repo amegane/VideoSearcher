@@ -8,12 +8,14 @@ import io.ktor.client.features.json.serializer.*
 actual class APIClient {
     actual val client: HttpClient = HttpClient(Android) {
         install(JsonFeature) {
-            serializer = KotlinxSerializer(json = kotlinx.serialization.json.Json {
-                isLenient = false
-                ignoreUnknownKeys = true
-                allowSpecialFloatingPointValues = true
-                useArrayPolymorphism = false
-            })
+            serializer = KotlinxSerializer(
+                json = kotlinx.serialization.json.Json {
+                    isLenient = false
+                    ignoreUnknownKeys = true
+                    allowSpecialFloatingPointValues = true
+                    useArrayPolymorphism = false
+                }
+            )
         }
     }
 }

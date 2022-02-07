@@ -78,7 +78,8 @@ class AndroidYoutubeAPITest {
                                             width = 480,
                                             height = 360
                                         )
-                                    ), channelTitle = "NHS inform"
+                                    ),
+                                    channelTitle = "NHS inform"
                                 )
                             ),
                             YoutubeVideoResource(
@@ -111,7 +112,8 @@ class AndroidYoutubeAPITest {
                                             width = 480,
                                             height = 360
                                         )
-                                    ), channelTitle = "Department of Health and Social Care"
+                                    ),
+                                    channelTitle = "Department of Health and Social Care"
                                 )
                             ),
                             YoutubeVideoResource(

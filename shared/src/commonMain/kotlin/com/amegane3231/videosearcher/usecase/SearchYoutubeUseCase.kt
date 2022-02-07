@@ -10,7 +10,7 @@ import org.koin.core.component.inject
 class SearchYoutubeUseCase : KoinComponent {
     private val repository: VideoSearchRepository by inject()
 
-    suspend fun searchYoutube(query: String) : Flow<YoutubeSearchedData> {
+    suspend fun searchYoutube(query: String): Flow<YoutubeSearchedData> {
         return flow {
             emit(repository.searchYoutube(query))
         }
