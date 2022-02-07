@@ -103,7 +103,7 @@ android {
     }
 }
 
-ktlint {
+configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
     version.set(ktlintVersion)
     reporters {
         reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.CHECKSTYLE)
