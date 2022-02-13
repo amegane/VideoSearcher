@@ -9,10 +9,12 @@ val activityComposeVersion: String by project
 val accompanistVersion: String by project
 val realmVersion: String by project
 val koinVersion: String by project
+val ktlintVersion: String by project
 
 plugins {
     id("com.android.application")
     kotlin("android")
+    id("org.jlleitschuh.gradle.ktlint")
 }
 
 android {
@@ -28,6 +30,12 @@ android {
         getByName("release") {
             isMinifyEnabled = false
         }
+    }
+    buildFeatures {
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = composeVersion
     }
 }
 
@@ -45,4 +53,12 @@ dependencies {
     implementation("androidx.activity:activity-compose:$activityComposeVersion")
     implementation("com.google.accompanist:accompanist-insets:$accompanistVersion")
     implementation("io.insert-koin:koin-core:$koinVersion")
+}
+
+configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
+    version.set(ktlintVersion)
+    reporters {
+        reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.CHECKSTYLE)
+    }
+    ignoreFailures.set(true)
 }
