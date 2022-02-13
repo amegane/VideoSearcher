@@ -1,5 +1,6 @@
 package com.amegane3231.videosearcher.android.screen
 
-sealed class Screen {
-    object Home : Screen()
+sealed class Screen(val route: String) {
+    object Home : Screen("home")
+    object SearchResult : Screen("searchResult")
 }

@@ -5,24 +5,34 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.ExperimentalComposeUiApi
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.amegane3231.videosearcher.android.theme.MovieSearcherTheme
 import com.google.accompanist.insets.ProvideWindowInsets
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
-fun VideoSearcherContent(currentScreen: Screen) {
-    when (currentScreen) {
-        Screen.Home -> HomeScreen()
+fun VideoSearcherContent() {
+    val navController = rememberNavController()
+    NavHost(navController = navController, startDestination = Screen.Home.route) {
+        composable(Screen.Home.route) {
+            HomeScreen {
+                navController.navigate(Screen.SearchResult.route)
+            }
+        }
+        composable(Screen.SearchResult.route) {
+            SearchResultScreen()
+        }
     }
 }
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun VideoSearcher() {
-    val currentScreen by remember { mutableStateOf(Screen.Home) }
     MovieSearcherTheme {
         ProvideWindowInsets(windowInsetsAnimationsEnabled = true) {
-            VideoSearcherContent(currentScreen = currentScreen)
+            VideoSearcherContent()
         }
     }
 }

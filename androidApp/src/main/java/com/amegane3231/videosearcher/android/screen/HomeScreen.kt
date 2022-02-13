@@ -15,13 +15,13 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.amegane3231.videosearcher.android.components.SearchBar
 import com.google.accompanist.insets.LocalWindowInsets
 
 @OptIn(ExperimentalComposeUiApi::class)
-@Preview
 @Composable
-fun HomeScreen() {
+fun HomeScreen(onSearch: () -> Unit) {
     val configuration = LocalConfiguration.current
     val defaultSearchBarHeight = (configuration.screenHeightDp / 2).dp
     val ime = LocalWindowInsets.current.ime
@@ -40,6 +40,6 @@ fun HomeScreen() {
             .fillMaxWidth()
             .padding(top = paddingTop)
     ) {
-        SearchBar()
+        SearchBar(onSearch)
     }
 }

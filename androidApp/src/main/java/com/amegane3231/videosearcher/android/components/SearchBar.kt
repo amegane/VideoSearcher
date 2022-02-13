@@ -21,7 +21,7 @@ import com.amegane3231.videosearcher.android.R
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
-fun SearchBar() {
+fun SearchBar(onSearch: () -> Unit) {
     var currentQuery by remember { mutableStateOf("") }
     val keyboardController = LocalSoftwareKeyboardController.current
 
@@ -53,6 +53,7 @@ fun SearchBar() {
                 Icon(Icons.Filled.Search, null)
             },
             keyboardActions = KeyboardActions(onSearch = {
+                onSearch()
                 keyboardController?.hide()
             }),
             textStyle = TextStyle(color = MaterialTheme.colors.onSurface),
