@@ -5,7 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.core.view.WindowCompat
-import com.amegane3231.videosearcher.android.screen.VideoSearcher
+import com.amegane3231.videosearcher.android.application.VideoSearcher
 
 class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalComposeUiApi::class)

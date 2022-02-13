@@ -1,13 +1,13 @@
-package com.amegane3231.videosearcher.android.screen
+package com.amegane3231.videosearcher.android.application
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.amegane3231.videosearcher.android.screen.HomeScreen
+import com.amegane3231.videosearcher.android.screen.Screen
+import com.amegane3231.videosearcher.android.screen.SearchResultScreen
 import com.amegane3231.videosearcher.android.theme.MovieSearcherTheme
 import com.google.accompanist.insets.ProvideWindowInsets
 
