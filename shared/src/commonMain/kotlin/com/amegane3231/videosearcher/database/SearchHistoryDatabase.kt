@@ -5,6 +5,7 @@ import io.realm.Realm
 import io.realm.RealmConfiguration
 import io.realm.query
 import org.koin.core.component.KoinComponent
+import java.util.*
 
 object SearchHistoryDatabase : KoinComponent {
     private val realm by lazy {
@@ -19,7 +20,7 @@ object SearchHistoryDatabase : KoinComponent {
     }
 
     suspend fun search(query: String): List<SearchHistory> {
-        return realm.query<SearchHistory>(query).find()
+        return realm.query<SearchHistory>("words BEGINSWITH[c]  $0", query).find()
     }
 
     suspend fun searchAll(): List<SearchHistory> {

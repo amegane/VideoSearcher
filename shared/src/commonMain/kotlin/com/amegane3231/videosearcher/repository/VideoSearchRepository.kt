@@ -16,9 +16,9 @@ class VideoSearchRepository : KoinComponent {
 
     suspend fun insertHistory(history: SearchHistory) = searchHistoryDatabase.insert(history)
 
-    suspend fun findHistory(query: String) = searchHistoryDatabase.search(query)
+    suspend fun searchHistory(query: String) = searchHistoryDatabase.search(query)
 
-    suspend fun findAllHistories() = searchHistoryDatabase.searchAll()
+    suspend fun searchAllHistories() = searchHistoryDatabase.searchAll()
 
     suspend fun deleteHistory(history: SearchHistory) = searchHistoryDatabase.delete(history)
 

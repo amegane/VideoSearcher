@@ -18,18 +18,25 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.amegane3231.videosearcher.android.R
+import com.amegane3231.videosearcher.flux.search.SearchHistoryActionCreator
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun SearchBar(onSearch: () -> Unit) {
     var currentQuery by remember { mutableStateOf("") }
     val keyboardController = LocalSoftwareKeyboardController.current
+    val actionCreator = SearchHistoryActionCreator()
+
+    if (currentQuery.isBlank()) {
+        actionCreator.getSearchHistory("")
+    }
 
     Row {
         TextField(
             value = currentQuery,
             onValueChange = {
                 currentQuery = it
+                actionCreator.getSearchHistory(it)
             },
             colors = TextFieldDefaults.textFieldColors(
                 backgroundColor = MaterialTheme.colors.surface,
@@ -53,6 +60,7 @@ fun SearchBar(onSearch: () -> Unit) {
                 Icon(Icons.Filled.Search, null)
             },
             keyboardActions = KeyboardActions(onSearch = {
+                actionCreator.insertSearchHistory(currentQuery)
                 onSearch()
                 keyboardController?.hide()
             }),
