@@ -14,7 +14,7 @@ plugins {
     kotlin("native.cocoapods")
     kotlin("plugin.serialization")
     id("com.android.library")
-    id("io.realm.kotlin") version "0.7.0"
+    id("io.realm.kotlin") version "0.9.0"
     id("org.jlleitschuh.gradle.ktlint")
 }
 

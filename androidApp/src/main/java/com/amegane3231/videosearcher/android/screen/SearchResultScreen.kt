@@ -17,7 +17,6 @@ fun SearchResultScreen() {
             .fillMaxSize()
     ) {
         Button(onClick = {}) {
-
         }
     }
 }
