@@ -15,6 +15,7 @@ plugins {
     kotlin("plugin.serialization")
     id("com.android.library")
     id("io.realm.kotlin") version "0.9.0"
+    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
     id("org.jlleitschuh.gradle.ktlint")
 }
 
@@ -101,6 +102,10 @@ android {
         minSdk = 26
         targetSdk = 31
     }
+}
+
+secrets {
+    propertiesFileName = "secrets.properties"
 }
 
 configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
