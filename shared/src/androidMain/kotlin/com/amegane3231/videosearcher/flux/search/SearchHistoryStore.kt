@@ -18,7 +18,7 @@ import kotlin.coroutines.CoroutineContext
 actual class SearchHistoryStore : Store, ViewModel(), CoroutineScope, KoinComponent {
     actual val dispatcher: Dispatcher by inject()
 
-    actual val _searchHistoryList: MutableStateFlow<List<SearchHistory>> =
+    private val _searchHistoryList: MutableStateFlow<List<SearchHistory>> =
         MutableStateFlow(listOf())
 
     actual val searchHistoryList: StateFlow<List<SearchHistory>> = _searchHistoryList
