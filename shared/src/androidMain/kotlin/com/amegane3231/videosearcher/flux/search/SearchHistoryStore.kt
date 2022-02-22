@@ -25,10 +25,11 @@ actual class SearchHistoryStore : Store, ViewModel(), CoroutineScope, KoinCompon
 
     override val coroutineContext: CoroutineContext = Dispatchers.IO + Job()
 
-    actual fun setSearchHistoryList(list: List<SearchHistory>) {
+    init {
+        subscribe()
     }
 
-    init {
+    private fun subscribe() {
         dispatcher.observer.subscribe(
             isThreadLocal = true,
             onNext = {

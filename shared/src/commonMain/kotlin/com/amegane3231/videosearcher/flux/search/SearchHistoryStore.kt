@@ -12,6 +12,4 @@ expect class SearchHistoryStore : Store {
     val _searchHistoryList: MutableStateFlow<List<SearchHistory>>
 
     val searchHistoryList: StateFlow<List<SearchHistory>>
-
-    fun setSearchHistoryList(list: List<SearchHistory>)
 }
