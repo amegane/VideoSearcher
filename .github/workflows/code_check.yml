@@ -22,6 +22,11 @@ jobs:
         run: |
           gem install bundler
           bundle install
+      - name: create secrets.propeties
+        run: |
+          cat <<EOF > secrets.properties
+          youtubeApiKey=YOUTUBE_API_KEY
+          EOF
       - name: run ktlintCheck
         run: ./gradlew ktlintCheck
       - name: run danger

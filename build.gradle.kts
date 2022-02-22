@@ -19,6 +19,7 @@ buildscript {
     val junitExtVersion by extra("1.1.3")
     val mockkVersion by extra("1.12.0")
     val espressoVersion by extra("3.4.0")
+    val secretGradleVersion by extra("2.0.1")
     val ktlintVersion by extra("0.42.1")
     val ktlintGradleVersion by extra("10.2.1")
 
@@ -32,6 +33,7 @@ buildscript {
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
         classpath("org.jetbrains.kotlin:kotlin-serialization:$kotlinVersion")
         classpath("com.android.tools.build:gradle:$gradleVersion")
+        classpath("com.google.android.libraries.mapsplatform.secrets-gradle-plugin:secrets-gradle-plugin:$secretGradleVersion")
         classpath("org.jlleitschuh.gradle:ktlint-gradle:$ktlintGradleVersion")
     }
 }
