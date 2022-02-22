@@ -5,7 +5,6 @@ import io.realm.Realm
 import io.realm.RealmConfiguration
 import io.realm.query
 import org.koin.core.component.KoinComponent
-import java.util.*
 
 object SearchHistoryDatabase : KoinComponent {
     private val realm by lazy {
