@@ -52,6 +52,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion")
     implementation("androidx.activity:activity-compose:$activityComposeVersion")
     implementation("com.google.accompanist:accompanist-insets:$accompanistVersion")
+    implementation("io.realm.kotlin:library-base:$realmVersion")
     implementation("io.insert-koin:koin-core:$koinVersion")
 }
 
