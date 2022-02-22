@@ -18,7 +18,7 @@ import kotlin.coroutines.CoroutineContext
 actual class SearchStore : Store, ViewModel(), CoroutineScope, KoinComponent {
     actual val dispatcher: Dispatcher by inject()
 
-    actual val _youtubeData: MutableStateFlow<SearchAction> =
+    private val _youtubeData: MutableStateFlow<SearchAction> =
         MutableStateFlow(SearchAction.Standby())
 
     actual val youtubeData: StateFlow<SearchAction> = _youtubeData
@@ -27,12 +27,6 @@ actual class SearchStore : Store, ViewModel(), CoroutineScope, KoinComponent {
 
     init {
         subscribe()
-    }
-
-    actual fun register(action: SearchAction) {
-        launch {
-            _youtubeData.emit(action)
-        }
     }
 
     private fun subscribe() {
