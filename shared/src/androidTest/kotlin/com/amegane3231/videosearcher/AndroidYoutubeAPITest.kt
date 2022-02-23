@@ -5,7 +5,7 @@ import com.amegane3231.videosearcher.data.youtube.*
 import com.amegane3231.videosearcher.di.initKoin
 import com.amegane3231.videosearcher.flux.core.Dispatcher
 import com.amegane3231.videosearcher.flux.search.SearchAction
-import com.amegane3231.videosearcher.flux.search.SearchActionCreator
+import com.amegane3231.videosearcher.flux.search.SearchActionCreatorImpl
 import com.amegane3231.videosearcher.flux.search.SearchStore
 import io.ktor.util.reflect.*
 import io.mockk.every
@@ -29,7 +29,7 @@ class AndroidYoutubeAPITest {
     fun getSearchData() {
         mockkObject(Dispatcher)
 
-        val creator = spyk(SearchActionCreator())
+        val creator = spyk(SearchActionCreatorImpl())
 
         val store = spyk(SearchStore())
 
