@@ -9,7 +9,7 @@ import com.amegane3231.videosearcher.android.screen.HomeScreen
 import com.amegane3231.videosearcher.android.screen.Screen
 import com.amegane3231.videosearcher.android.screen.SearchResultScreen
 import com.amegane3231.videosearcher.android.theme.MovieSearcherTheme
-import com.amegane3231.videosearcher.flux.search.SearchHistoryStore
+import com.amegane3231.videosearcher.flux.search.SearchHistoryStoreImpl
 import com.google.accompanist.insets.ProvideWindowInsets
 
 @OptIn(ExperimentalComposeUiApi::class)
@@ -18,7 +18,7 @@ fun VideoSearcherContent() {
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = Screen.Home.route) {
         composable(Screen.Home.route) {
-            HomeScreen(SearchHistoryStore()) {
+            HomeScreen(SearchHistoryStoreImpl()) {
                 navController.navigate(Screen.SearchResult.route)
             }
         }

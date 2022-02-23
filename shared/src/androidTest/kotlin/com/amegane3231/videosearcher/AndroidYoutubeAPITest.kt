@@ -1,13 +1,19 @@
 package com.amegane3231.videosearcher
 
 import com.amegane3231.videosearcher.data.search.SearchResult
-import com.amegane3231.videosearcher.data.youtube.*
+import com.amegane3231.videosearcher.data.youtube.DetailThumbnail
+import com.amegane3231.videosearcher.data.youtube.PageInfo
+import com.amegane3231.videosearcher.data.youtube.Thumbnails
+import com.amegane3231.videosearcher.data.youtube.YoutubeSearchedData
+import com.amegane3231.videosearcher.data.youtube.YoutubeVideoId
+import com.amegane3231.videosearcher.data.youtube.YoutubeVideoResource
+import com.amegane3231.videosearcher.data.youtube.YoutubeVideoSnippet
 import com.amegane3231.videosearcher.di.initKoin
 import com.amegane3231.videosearcher.flux.core.Dispatcher
 import com.amegane3231.videosearcher.flux.search.SearchAction
 import com.amegane3231.videosearcher.flux.search.SearchActionCreatorImpl
-import com.amegane3231.videosearcher.flux.search.SearchStore
-import io.ktor.util.reflect.*
+import com.amegane3231.videosearcher.flux.search.SearchStoreImpl
+import io.ktor.util.reflect.instanceOf
 import io.mockk.every
 import io.mockk.mockkObject
 import io.mockk.spyk
@@ -31,7 +37,7 @@ class AndroidYoutubeAPITest {
 
         val creator = spyk(SearchActionCreatorImpl())
 
-        val store = spyk(SearchStore())
+        val store = spyk(SearchStoreImpl())
 
         every { creator.searchData(any()) } answers {
             Dispatcher.dispatch(SearchAction.FetchDataWaiting())

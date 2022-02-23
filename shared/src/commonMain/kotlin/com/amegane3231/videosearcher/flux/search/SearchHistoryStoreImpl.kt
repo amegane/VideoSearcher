@@ -2,11 +2,10 @@ package com.amegane3231.videosearcher.flux.search
 
 import com.amegane3231.videosearcher.data.search.SearchHistory
 import com.amegane3231.videosearcher.flux.core.Dispatcher
-import com.amegane3231.videosearcher.flux.core.Store
 import kotlinx.coroutines.flow.StateFlow
 
-interface SearchHistoryStore : Store {
-    val dispatcher: Dispatcher
+expect class SearchHistoryStoreImpl : SearchHistoryStore {
+    override val dispatcher: Dispatcher
 
-    val searchHistoryList: StateFlow<List<SearchHistory>>
+    override val searchHistoryList: StateFlow<List<SearchHistory>>
 }

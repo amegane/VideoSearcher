@@ -10,7 +10,9 @@ import com.amegane3231.videosearcher.flux.search.SearchActionCreatorImpl
 import com.amegane3231.videosearcher.flux.search.SearchHistoryActionCreator
 import com.amegane3231.videosearcher.flux.search.SearchHistoryActionCreatorImpl
 import com.amegane3231.videosearcher.flux.search.SearchHistoryStore
+import com.amegane3231.videosearcher.flux.search.SearchHistoryStoreImpl
 import com.amegane3231.videosearcher.flux.search.SearchStore
+import com.amegane3231.videosearcher.flux.search.SearchStoreImpl
 import com.amegane3231.videosearcher.repository.VideoSearchRepository
 import com.amegane3231.videosearcher.repository.VideoSearchRepositoryImpl
 import com.amegane3231.videosearcher.usecase.GetSearchHistoriesUseCase
@@ -40,8 +42,8 @@ val commonModule = module {
     factory { GetSearchHistoriesUseCaseImpl() as GetSearchHistoriesUseCase }
     factory { SearchActionCreatorImpl() as SearchActionCreator }
     factory { SearchHistoryActionCreatorImpl() as SearchHistoryActionCreator }
-    factory { SearchStore() }
-    factory { SearchHistoryStore() }
+    factory { SearchStoreImpl() as SearchStore }
+    factory { SearchHistoryStoreImpl() as SearchHistoryStore }
 }
 
 inline fun <reified T> getKoinInstance(): T {

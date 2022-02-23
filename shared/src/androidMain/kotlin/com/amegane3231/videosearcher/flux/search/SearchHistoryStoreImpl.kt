@@ -1,9 +1,8 @@
 package com.amegane3231.videosearcher.flux.search
 
 import androidx.lifecycle.ViewModel
-import com.amegane3231.videosearcher.data.search.SearchResult
+import com.amegane3231.videosearcher.data.search.SearchHistory
 import com.amegane3231.videosearcher.flux.core.Dispatcher
-import com.amegane3231.videosearcher.flux.core.Store
 import com.badoo.reaktive.observable.subscribe
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -15,13 +14,13 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import kotlin.coroutines.CoroutineContext
 
-actual class SearchStore : Store, ViewModel(), CoroutineScope, KoinComponent {
-    actual val dispatcher: Dispatcher by inject()
+actual class SearchHistoryStoreImpl : SearchHistoryStore, ViewModel(), CoroutineScope, KoinComponent {
+    actual override val dispatcher: Dispatcher by inject()
 
-    private val _youtubeData: MutableStateFlow<SearchAction> =
-        MutableStateFlow(SearchAction.Standby())
+    private val _searchHistoryList: MutableStateFlow<List<SearchHistory>> =
+        MutableStateFlow(listOf())
 
-    actual val youtubeData: StateFlow<SearchAction> = _youtubeData
+    actual override val searchHistoryList: StateFlow<List<SearchHistory>> = _searchHistoryList
 
     override val coroutineContext: CoroutineContext = Dispatchers.IO + Job()
 
@@ -33,9 +32,9 @@ actual class SearchStore : Store, ViewModel(), CoroutineScope, KoinComponent {
         dispatcher.observer.subscribe(
             isThreadLocal = true,
             onNext = {
-                if (it is SearchAction.FetchDataSucceeded && it.data is SearchResult.YoutubeData) {
+                if (it is SearchHistoryAction.GetSearchHistoryList) {
                     launch {
-                        _youtubeData.emit(it)
+                        _searchHistoryList.emit(it.list)
                     }
                 }
             },
