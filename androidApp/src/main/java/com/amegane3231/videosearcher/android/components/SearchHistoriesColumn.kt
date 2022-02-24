@@ -9,14 +9,18 @@ import androidx.compose.ui.Modifier
 import com.amegane3231.videosearcher.data.search.SearchHistory
 
 @Composable
-fun SearchHistoriesColumn(searchHistoryList: List<SearchHistory>, onSearch: () -> Unit) {
-    LazyColumn {
+fun SearchHistoriesColumn(
+    searchHistoryList: List<SearchHistory>,
+    onSearch: (String) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    LazyColumn(modifier = modifier) {
         items(searchHistoryList) { history ->
             SearchHistoryRow(
                 history = history,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .clickable { onSearch() }
+                    .clickable { onSearch(history.words) }
             )
         }
     }
