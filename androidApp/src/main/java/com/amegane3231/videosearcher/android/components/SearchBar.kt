@@ -11,10 +11,6 @@ import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
@@ -23,27 +19,21 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import com.amegane3231.videosearcher.android.R
-import com.amegane3231.videosearcher.di.getKoinInstance
-import com.amegane3231.videosearcher.flux.search.SearchHistoryActionCreator
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
-fun SearchBar(onSearch: () -> Unit, modifier: Modifier = Modifier) {
-    var currentQuery by remember { mutableStateOf("") }
+fun SearchBar(
+    searchWords: String,
+    onWordsChange: (String) -> Unit,
+    onSearch: (String) -> Unit,
+    modifier: Modifier = Modifier
+) {
     val keyboardController = LocalSoftwareKeyboardController.current
-    val searchHistoryActionCreator: SearchHistoryActionCreator = getKoinInstance()
-
-    if (currentQuery.isBlank()) {
-        searchHistoryActionCreator.getSearchHistory("")
-    }
 
     Row {
         TextField(
-            value = currentQuery,
-            onValueChange = {
-                currentQuery = it
-                searchHistoryActionCreator.getSearchHistory(it)
-            },
+            value = searchWords,
+            onValueChange = onWordsChange,
             colors = TextFieldDefaults.textFieldColors(
                 backgroundColor = MaterialTheme.colors.surface,
                 cursorColor = MaterialTheme.colors.onSurface,
@@ -66,8 +56,7 @@ fun SearchBar(onSearch: () -> Unit, modifier: Modifier = Modifier) {
                 Icon(Icons.Filled.Search, null)
             },
             keyboardActions = KeyboardActions(onSearch = {
-                searchHistoryActionCreator.insertSearchHistory(currentQuery)
-                onSearch()
+                onSearch(searchWords)
                 keyboardController?.hide()
             }),
             textStyle = TextStyle(color = MaterialTheme.colors.onSurface),
