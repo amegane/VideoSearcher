@@ -43,7 +43,12 @@ fun HomeScreen(store: SearchHistoryStoreImpl, onSearch: () -> Unit) {
             .fillMaxWidth()
             .padding(top = paddingTop)
     ) {
-        SearchBar(onSearch)
+        SearchBar(
+            onSearch = onSearch,
+            modifier = Modifier
+                .fillMaxWidth(fraction = 1f)
+                .padding(8.dp)
+        )
         if (ime.isVisible) {
             SearchHistoriesColumn(searchHistoryList = searchHistoryList, onSearch = onSearch)
         }
