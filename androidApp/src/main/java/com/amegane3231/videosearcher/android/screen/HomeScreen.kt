@@ -17,12 +17,12 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.amegane3231.videosearcher.android.components.SearchBar
 import com.amegane3231.videosearcher.android.components.SearchHistoriesColumn
-import com.amegane3231.videosearcher.flux.search.SearchHistoryStoreImpl
+import com.amegane3231.videosearcher.flux.search.SearchHistoryStore
 import com.google.accompanist.insets.LocalWindowInsets
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
-fun HomeScreen(store: SearchHistoryStoreImpl, onSearch: () -> Unit) {
+fun HomeScreen(store: SearchHistoryStore, onSearch: () -> Unit) {
     val configuration = LocalConfiguration.current
     val defaultSearchBarHeight = (configuration.screenHeightDp / 2).dp
     val ime = LocalWindowInsets.current.ime
