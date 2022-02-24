@@ -1,7 +1,11 @@
 package com.amegane3231.videosearcher.android.application
 
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.ExperimentalComposeUiApi
+import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -32,8 +36,10 @@ fun VideoSearcherContent() {
 @Composable
 fun VideoSearcher() {
     MovieSearcherTheme {
-        ProvideWindowInsets(windowInsetsAnimationsEnabled = true) {
-            VideoSearcherContent()
+        Surface(color = MaterialTheme.colors.background, modifier = Modifier.fillMaxSize()) {
+            ProvideWindowInsets(windowInsetsAnimationsEnabled = true) {
+                VideoSearcherContent()
+            }
         }
     }
 }
