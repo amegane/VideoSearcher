@@ -13,8 +13,14 @@ class SearchHistoryDatabaseImpl : SearchHistoryDatabase, KoinComponent {
     }
 
     override suspend fun insert(history: SearchHistory) {
-        realm.write {
-            copyToRealm(history.apply { id = getSearchHistoryId() })
+        if (realm.query<SearchHistory>("words = $0", history.words).first().find() != null) {
+            realm.write {
+                findLatest(history)?.id = getSearchHistoryId()
+            }
+        } else {
+            realm.write {
+                copyToRealm(history.apply { id = getSearchHistoryId() })
+            }
         }
     }
 
@@ -43,7 +49,7 @@ class SearchHistoryDatabaseImpl : SearchHistoryDatabase, KoinComponent {
         return if (maxId != null) {
             maxId + 1
         } else {
-            0
+            1
         }
     }
 }

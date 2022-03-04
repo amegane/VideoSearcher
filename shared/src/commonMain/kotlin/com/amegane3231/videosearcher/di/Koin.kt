@@ -42,8 +42,8 @@ val commonModule = module {
     factory { GetSearchHistoriesUseCaseImpl() as GetSearchHistoriesUseCase }
     factory { SearchActionCreatorImpl() as SearchActionCreator }
     factory { SearchHistoryActionCreatorImpl() as SearchHistoryActionCreator }
-    factory { SearchStoreImpl() as SearchStore }
-    factory { SearchHistoryStoreImpl() as SearchHistoryStore }
+    single { SearchStoreImpl() as SearchStore }
+    single { SearchHistoryStoreImpl() as SearchHistoryStore }
 }
 
 inline fun <reified T> getKoinInstance(): T {
