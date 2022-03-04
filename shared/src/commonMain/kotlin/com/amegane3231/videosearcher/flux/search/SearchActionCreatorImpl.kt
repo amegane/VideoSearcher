@@ -18,10 +18,10 @@ class SearchActionCreatorImpl : SearchActionCreator, CoroutineScope, KoinCompone
 
     override val coroutineContext: CoroutineContext = Dispatchers.IO
 
-    override fun searchData(query: String) {
+    override fun searchData(query: String, pageToken: String) {
         dispatcher.dispatch(SearchAction.FetchDataWaiting())
         launch {
-            searchYoutubeUseCase(query)
+            searchYoutubeUseCase(query, pageToken)
                 .catch {
                     dispatcher.dispatch(SearchAction.FetchDataFailed(it))
                 }

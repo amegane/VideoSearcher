@@ -70,7 +70,7 @@ fun HomeScreen(store: SearchHistoryStore, navController: NavController) {
             },
             onSearch = {
                 if (it.isBlank()) return@SearchBar
-                navController.navigate("${Screen.SearchResult.route}/${it}")
+                navController.navigate("${Screen.SearchResult.route}/${it}/{}")
                 searchHistoryActionCreator.insertSearchHistory(it)
                 searchActionCreator.searchData(it)
             },
@@ -82,7 +82,7 @@ fun HomeScreen(store: SearchHistoryStore, navController: NavController) {
             SearchHistoriesColumn(
                 searchHistoryList = searchHistoryList,
                 onSearch = {
-                    navController.navigate("${Screen.SearchResult.route}/${it}")
+                    navController.navigate("${Screen.SearchResult.route}/${it}/{}")
                     searchActionCreator.searchData(it)
                 },
                 modifier = Modifier.imePadding()

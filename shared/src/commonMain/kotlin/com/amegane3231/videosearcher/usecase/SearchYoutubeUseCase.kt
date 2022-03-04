@@ -4,5 +4,5 @@ import com.amegane3231.videosearcher.data.youtube.YoutubeSearchedData
 import kotlinx.coroutines.flow.Flow
 
 interface SearchYoutubeUseCase {
-    suspend operator fun invoke(query: String): Flow<YoutubeSearchedData>
+    suspend operator fun invoke(query: String, pageToken: String): Flow<YoutubeSearchedData>
 }

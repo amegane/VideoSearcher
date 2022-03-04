@@ -22,7 +22,7 @@ import com.google.accompanist.insets.navigationBarsPadding
 import com.google.accompanist.insets.statusBarsPadding
 
 @Composable
-fun SearchResultScreen(store: SearchStore, query: String) {
+fun SearchResultScreen(store: SearchStore, query: String, pageToken: String) {
     val searchResult by store.youtubeData.collectAsState()
 
     when (searchResult) {
@@ -38,7 +38,7 @@ fun SearchResultScreen(store: SearchStore, query: String) {
         is SearchAction.FetchDataSucceeded -> {
             VideoListColumn(
                 data = (searchResult as SearchAction.FetchDataSucceeded).data,
-                query = query,
+                onAppearLastItem = { },
                 modifier = Modifier
                     .fillMaxSize()
                     .statusBarsPadding()
