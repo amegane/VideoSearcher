@@ -7,6 +7,7 @@ val navigationComposeVersion: String by project
 val lifecycleVersion: String by project
 val activityComposeVersion: String by project
 val accompanistVersion: String by project
+val coilVersion: String by project
 val realmVersion: String by project
 val koinVersion: String by project
 val ktlintVersion: String by project
@@ -47,11 +48,12 @@ dependencies {
     implementation("com.google.android.material:material:$materialVersion")
     implementation("androidx.compose.ui:ui:$composeVersion")
     implementation("androidx.compose.material:material:$composeVersion")
-    implementation("androidx.compose.ui:ui-tooling-preview:$composeVersion")
+    implementation("androidx.compose.ui:ui-tooling:$composeVersion")
     implementation("androidx.navigation:navigation-compose:$navigationComposeVersion")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion")
     implementation("androidx.activity:activity-compose:$activityComposeVersion")
     implementation("com.google.accompanist:accompanist-insets:$accompanistVersion")
+    implementation("io.coil-kt:coil-compose:$coilVersion")
     implementation("io.realm.kotlin:library-base:$realmVersion")
     implementation("io.insert-koin:koin-core:$koinVersion")
 }

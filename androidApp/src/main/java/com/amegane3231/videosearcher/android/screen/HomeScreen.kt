@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -25,18 +24,19 @@ import com.amegane3231.videosearcher.flux.search.SearchActionCreator
 import com.amegane3231.videosearcher.flux.search.SearchHistoryActionCreator
 import com.amegane3231.videosearcher.flux.search.SearchHistoryStore
 import com.google.accompanist.insets.LocalWindowInsets
+import com.google.accompanist.insets.imePadding
+import com.google.accompanist.insets.statusBarsPadding
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun HomeScreen(store: SearchHistoryStore, navigate: () -> Unit) {
     val configuration = LocalConfiguration.current
-    val defaultSearchBarHeight = (configuration.screenHeightDp / 2).dp
     val ime = LocalWindowInsets.current.ime
     val paddingTop: Dp by animateDpAsState(
         targetValue = if (ime.isVisible) {
-            TextFieldDefaults.MinHeight
+            0.dp
         } else {
-            defaultSearchBarHeight
+            (configuration.screenHeightDp / 2).dp
         }
     )
 
@@ -48,36 +48,43 @@ fun HomeScreen(store: SearchHistoryStore, navigate: () -> Unit) {
 
     var currentQuery by remember { mutableStateOf("") }
 
-    searchHistoryActionCreator.getSearchHistory(currentQuery)
+    val isListEmpty = searchHistoryList.isEmpty()
+
+    if (isListEmpty) {
+        searchHistoryActionCreator.getSearchHistory(currentQuery)
+    }
 
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.Start,
         modifier = Modifier
             .fillMaxWidth()
-            .padding(top = paddingTop)
+            .statusBarsPadding()
     ) {
         SearchBar(
             searchWords = currentQuery,
             onWordsChange = {
                 currentQuery = it
+                searchHistoryActionCreator.getSearchHistory(it)
             },
             onSearch = {
-                searchActionCreator.searchData(it)
-                searchHistoryActionCreator.insertSearchHistory(it)
+                if (it.isBlank()) return@SearchBar
                 navigate()
+                searchHistoryActionCreator.insertSearchHistory(it)
+                searchActionCreator.searchData(it)
             },
             modifier = Modifier
                 .fillMaxWidth(fraction = 1f)
-                .padding(8.dp)
+                .padding(start = 8.dp, top = paddingTop, end = 8.dp)
         )
-        if (paddingTop.value == TextFieldDefaults.MinHeight.value) {
+        if (paddingTop.value == 0F) {
             SearchHistoriesColumn(
                 searchHistoryList = searchHistoryList,
                 onSearch = {
-                    searchActionCreator.searchData(it)
                     navigate()
-                }
+                    searchActionCreator.searchData(it)
+                },
+                modifier = Modifier.imePadding()
             )
         }
     }

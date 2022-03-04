@@ -11,6 +11,7 @@ buildscript {
     val activityComposeVersion by extra("1.4.0")
     val navigationComposeVersion by extra("2.4.0-rc01")
     val accompanistVersion by extra("0.22.0-rc")
+    val coilVersion by extra("1.4.0")
     val realmVersion by extra("0.9.0")
     val ktorVersion by extra("1.6.7")
     val koinVersion by extra("3.1.5")
