@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -26,18 +25,18 @@ import com.amegane3231.videosearcher.flux.search.SearchHistoryActionCreator
 import com.amegane3231.videosearcher.flux.search.SearchHistoryStore
 import com.google.accompanist.insets.LocalWindowInsets
 import com.google.accompanist.insets.imePadding
+import com.google.accompanist.insets.statusBarsPadding
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun HomeScreen(store: SearchHistoryStore, navigate: () -> Unit) {
     val configuration = LocalConfiguration.current
-    val defaultSearchBarHeight = (configuration.screenHeightDp / 2).dp
     val ime = LocalWindowInsets.current.ime
     val paddingTop: Dp by animateDpAsState(
         targetValue = if (ime.isVisible) {
-            TextFieldDefaults.MinHeight
+            0.dp
         } else {
-            defaultSearchBarHeight
+            (configuration.screenHeightDp / 2).dp
         }
     )
 
@@ -60,7 +59,7 @@ fun HomeScreen(store: SearchHistoryStore, navigate: () -> Unit) {
         horizontalAlignment = Alignment.Start,
         modifier = Modifier
             .fillMaxWidth()
-            .padding(top = paddingTop)
+            .statusBarsPadding()
     ) {
         SearchBar(
             searchWords = currentQuery,
@@ -76,9 +75,9 @@ fun HomeScreen(store: SearchHistoryStore, navigate: () -> Unit) {
             },
             modifier = Modifier
                 .fillMaxWidth(fraction = 1f)
-                .padding(8.dp)
+                .padding(start = 8.dp, top = paddingTop, end = 8.dp)
         )
-        if (paddingTop.value == TextFieldDefaults.MinHeight.value) {
+        if (paddingTop.value == 0F) {
             SearchHistoriesColumn(
                 searchHistoryList = searchHistoryList,
                 onSearch = {
