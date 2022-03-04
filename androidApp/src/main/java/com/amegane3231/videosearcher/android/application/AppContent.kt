@@ -6,9 +6,11 @@ import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.amegane3231.videosearcher.android.screen.HomeScreen
 import com.amegane3231.videosearcher.android.screen.Screen
 import com.amegane3231.videosearcher.android.screen.SearchResultScreen
@@ -25,13 +27,15 @@ fun VideoSearcherContent() {
     NavHost(navController = navController, startDestination = Screen.Home.route) {
         composable(Screen.Home.route) {
             val searchHistoryStore = getKoinInstance<SearchHistoryStore>()
-            HomeScreen(searchHistoryStore) {
-                navController.navigate(Screen.SearchResult.route)
-            }
+            HomeScreen(searchHistoryStore, navController)
         }
-        composable(Screen.SearchResult.route) {
+        composable(
+            "${Screen.SearchResult.route}/{query}",
+            listOf(navArgument("query") { type = NavType.StringType })
+        ) {
             val searchStore = getKoinInstance<SearchStore>()
-            SearchResultScreen(searchStore)
+            val query = requireNotNull(it.arguments?.getString("query"))
+            SearchResultScreen(searchStore, query)
         }
     }
 }

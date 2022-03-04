@@ -14,13 +14,15 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import com.amegane3231.videosearcher.android.R
 import com.amegane3231.videosearcher.android.components.VideoListColumn
+import com.amegane3231.videosearcher.di.getKoinInstance
 import com.amegane3231.videosearcher.flux.search.SearchAction
+import com.amegane3231.videosearcher.flux.search.SearchActionCreator
 import com.amegane3231.videosearcher.flux.search.SearchStore
 import com.google.accompanist.insets.navigationBarsPadding
 import com.google.accompanist.insets.statusBarsPadding
 
 @Composable
-fun SearchResultScreen(store: SearchStore) {
+fun SearchResultScreen(store: SearchStore, query: String) {
     val searchResult by store.youtubeData.collectAsState()
 
     when (searchResult) {
@@ -36,6 +38,7 @@ fun SearchResultScreen(store: SearchStore) {
         is SearchAction.FetchDataSucceeded -> {
             VideoListColumn(
                 data = (searchResult as SearchAction.FetchDataSucceeded).data,
+                query = query,
                 modifier = Modifier
                     .fillMaxSize()
                     .statusBarsPadding()

@@ -11,7 +11,7 @@ import androidx.compose.ui.unit.dp
 import com.amegane3231.videosearcher.data.search.SearchResult
 
 @Composable
-fun VideoListColumn(data: SearchResult, modifier: Modifier = Modifier) {
+fun VideoListColumn(data: SearchResult, query: String, modifier: Modifier = Modifier) {
     LazyColumn(
         modifier = modifier
     ) {
