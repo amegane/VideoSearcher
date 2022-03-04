@@ -25,6 +25,7 @@ import com.amegane3231.videosearcher.flux.search.SearchActionCreator
 import com.amegane3231.videosearcher.flux.search.SearchHistoryActionCreator
 import com.amegane3231.videosearcher.flux.search.SearchHistoryStore
 import com.google.accompanist.insets.LocalWindowInsets
+import com.google.accompanist.insets.imePadding
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
@@ -48,7 +49,11 @@ fun HomeScreen(store: SearchHistoryStore, navigate: () -> Unit) {
 
     var currentQuery by remember { mutableStateOf("") }
 
-    searchHistoryActionCreator.getSearchHistory(currentQuery)
+    val isListEmpty = searchHistoryList.isEmpty()
+
+    if (isListEmpty) {
+        searchHistoryActionCreator.getSearchHistory(currentQuery)
+    }
 
     Column(
         verticalArrangement = Arrangement.Center,
@@ -61,11 +66,13 @@ fun HomeScreen(store: SearchHistoryStore, navigate: () -> Unit) {
             searchWords = currentQuery,
             onWordsChange = {
                 currentQuery = it
+                searchHistoryActionCreator.getSearchHistory(it)
             },
             onSearch = {
-                searchActionCreator.searchData(it)
-                searchHistoryActionCreator.insertSearchHistory(it)
+                if (it.isBlank()) return@SearchBar
                 navigate()
+                searchHistoryActionCreator.insertSearchHistory(it)
+                searchActionCreator.searchData(it)
             },
             modifier = Modifier
                 .fillMaxWidth(fraction = 1f)
@@ -75,9 +82,10 @@ fun HomeScreen(store: SearchHistoryStore, navigate: () -> Unit) {
             SearchHistoriesColumn(
                 searchHistoryList = searchHistoryList,
                 onSearch = {
-                    searchActionCreator.searchData(it)
                     navigate()
-                }
+                    searchActionCreator.searchData(it)
+                },
+                modifier = Modifier.imePadding()
             )
         }
     }
