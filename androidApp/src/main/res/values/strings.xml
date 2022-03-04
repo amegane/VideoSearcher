@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="search_movie">動画を検索</string>
+    <string name="msg_failed_data">データの読み込みに失敗しました。\n時間を置いて再試行してください。</string>
+</resources>
