@@ -1,4 +1,4 @@
-package com.amegane3231.videosearcher.android.screen
+package com.amegane3231.videosearcher.android.ui.screen
 
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.layout.Arrangement
@@ -17,8 +17,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.amegane3231.videosearcher.android.components.SearchBar
-import com.amegane3231.videosearcher.android.components.SearchHistoriesColumn
+import com.amegane3231.videosearcher.android.ui.components.SearchBar
+import com.amegane3231.videosearcher.android.ui.components.SearchHistoriesColumn
 import com.amegane3231.videosearcher.di.getKoinInstance
 import com.amegane3231.videosearcher.flux.search.SearchActionCreator
 import com.amegane3231.videosearcher.flux.search.SearchHistoryActionCreator

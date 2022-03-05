@@ -1,4 +1,4 @@
-package com.amegane3231.videosearcher.android.theme
+package com.amegane3231.videosearcher.android.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

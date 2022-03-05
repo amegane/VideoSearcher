@@ -1,4 +1,4 @@
-package com.amegane3231.videosearcher.android.components
+package com.amegane3231.videosearcher.android.ui.components
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.text.KeyboardActions

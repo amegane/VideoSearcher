@@ -1,4 +1,4 @@
-package com.amegane3231.videosearcher.android.application
+package com.amegane3231.videosearcher.android
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
@@ -11,10 +11,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.amegane3231.videosearcher.android.screen.HomeScreen
-import com.amegane3231.videosearcher.android.screen.Screen
-import com.amegane3231.videosearcher.android.screen.SearchResultScreen
-import com.amegane3231.videosearcher.android.theme.MovieSearcherTheme
+import com.amegane3231.videosearcher.android.ui.screen.HomeScreen
+import com.amegane3231.videosearcher.android.ui.screen.Screen
+import com.amegane3231.videosearcher.android.ui.screen.SearchResultScreen
+import com.amegane3231.videosearcher.android.ui.theme.MovieSearcherTheme
 import com.amegane3231.videosearcher.di.getKoinInstance
 import com.amegane3231.videosearcher.flux.search.SearchHistoryStore
 import com.amegane3231.videosearcher.flux.search.SearchStore

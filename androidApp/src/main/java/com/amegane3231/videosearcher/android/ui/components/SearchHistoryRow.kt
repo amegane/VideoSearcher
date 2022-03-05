@@ -1,4 +1,4 @@
-package com.amegane3231.videosearcher.android.components
+package com.amegane3231.videosearcher.android.ui.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
