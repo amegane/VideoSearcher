@@ -27,18 +27,17 @@ fun VideoSearcherContent() {
     NavHost(navController = navController, startDestination = Screen.Home.route) {
         composable(Screen.Home.route) {
             val searchHistoryStore = getKoinInstance<SearchHistoryStore>()
-            HomeScreen(searchHistoryStore, navController)
+            HomeScreen(searchHistoryStore) {
+                navController.navigate("${Screen.SearchResult.route}/$it")
+            }
         }
         composable(
-            "${Screen.SearchResult.route}/{query}/{pageToken}",
-            listOf(
-                navArgument("query") { type = NavType.StringType },
-                navArgument("pageToken") { type = NavType.StringType })
+            "${Screen.SearchResult.route}/{query}",
+            listOf(navArgument("query") { type = NavType.StringType })
         ) {
             val searchStore = getKoinInstance<SearchStore>()
             val query = requireNotNull(it.arguments?.getString("query"))
-            val pageToken = requireNotNull(it.arguments?.getString("pageToken"))
-            SearchResultScreen(searchStore, query, pageToken)
+            SearchResultScreen(searchStore, query)
         }
     }
 }

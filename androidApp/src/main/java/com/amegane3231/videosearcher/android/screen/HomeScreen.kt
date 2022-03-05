@@ -17,7 +17,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import com.amegane3231.videosearcher.android.components.SearchBar
 import com.amegane3231.videosearcher.android.components.SearchHistoriesColumn
 import com.amegane3231.videosearcher.di.getKoinInstance
@@ -30,7 +29,7 @@ import com.google.accompanist.insets.statusBarsPadding
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
-fun HomeScreen(store: SearchHistoryStore, navController: NavController) {
+fun HomeScreen(store: SearchHistoryStore, navigate: (String) -> Unit) {
     val configuration = LocalConfiguration.current
     val ime = LocalWindowInsets.current.ime
     val paddingTop: Dp by animateDpAsState(
@@ -70,7 +69,7 @@ fun HomeScreen(store: SearchHistoryStore, navController: NavController) {
             },
             onSearch = {
                 if (it.isBlank()) return@SearchBar
-                navController.navigate("${Screen.SearchResult.route}/${it}/{}")
+                navigate(it)
                 searchHistoryActionCreator.insertSearchHistory(it)
                 searchActionCreator.searchData(it)
             },
@@ -82,7 +81,7 @@ fun HomeScreen(store: SearchHistoryStore, navController: NavController) {
             SearchHistoriesColumn(
                 searchHistoryList = searchHistoryList,
                 onSearch = {
-                    navController.navigate("${Screen.SearchResult.route}/${it}/{}")
+                    navigate(it)
                     searchActionCreator.searchData(it)
                 },
                 modifier = Modifier.imePadding()

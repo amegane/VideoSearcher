@@ -22,7 +22,7 @@ import com.google.accompanist.insets.navigationBarsPadding
 import com.google.accompanist.insets.statusBarsPadding
 
 @Composable
-fun SearchResultScreen(store: SearchStore, query: String, pageToken: String) {
+fun SearchResultScreen(store: SearchStore, query: String) {
     val searchResult by store.youtubeData.collectAsState()
 
     when (searchResult) {
