@@ -1,4 +1,4 @@
-package com.amegane3231.videosearcher.android.screen
+package com.amegane3231.videosearcher.android.ui.screen
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -13,10 +13,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import com.amegane3231.videosearcher.android.R
-import com.amegane3231.videosearcher.android.components.VideoListColumn
-import com.amegane3231.videosearcher.di.getKoinInstance
+import com.amegane3231.videosearcher.android.ui.components.VideoListColumn
 import com.amegane3231.videosearcher.flux.search.SearchAction
-import com.amegane3231.videosearcher.flux.search.SearchActionCreator
 import com.amegane3231.videosearcher.flux.search.SearchStore
 import com.google.accompanist.insets.navigationBarsPadding
 import com.google.accompanist.insets.statusBarsPadding
