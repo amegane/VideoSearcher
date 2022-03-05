@@ -10,9 +10,9 @@ import org.koin.core.component.inject
 class SearchYoutubeUseCaseImpl : SearchYoutubeUseCase, KoinComponent {
     private val repository: VideoSearchRepository by inject()
 
-    override suspend fun invoke(query: String): Flow<YoutubeSearchedData> {
+    override suspend fun invoke(query: String, pageToken: String): Flow<YoutubeSearchedData> {
         return flow {
-            emit(repository.searchYoutube(query))
+            emit(repository.searchYoutube(query, pageToken))
         }
     }
 }

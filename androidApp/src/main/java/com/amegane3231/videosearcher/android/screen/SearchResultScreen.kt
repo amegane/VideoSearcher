@@ -38,7 +38,7 @@ fun SearchResultScreen(store: SearchStore, query: String) {
         is SearchAction.FetchDataSucceeded -> {
             VideoListColumn(
                 data = (searchResult as SearchAction.FetchDataSucceeded).data,
-                query = query,
+                onAppearLastItem = { },
                 modifier = Modifier
                     .fillMaxSize()
                     .statusBarsPadding()

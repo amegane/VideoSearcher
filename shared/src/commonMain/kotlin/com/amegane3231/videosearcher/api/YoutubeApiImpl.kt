@@ -10,8 +10,8 @@ import org.koin.core.component.KoinComponent
 class YoutubeApiImpl : YoutubeApi, KoinComponent {
     private val apiClient = APIClient()
 
-    override suspend fun searchData(query: String) =
-        apiClient.client.get<YoutubeSearchedData>("https://www.googleapis.com/youtube/v3/search?key=${BuildConfig.youtubeApiKey}&type=video&&part=snippet&&maxResults=10&&q=$query") {
+    override suspend fun searchData(query: String, pageToken: String) =
+        apiClient.client.get<YoutubeSearchedData>("https://www.googleapis.com/youtube/v3/search?key=${BuildConfig.youtubeApiKey}&type=video&&part=snippet&&maxResults=10&pageToken=$pageToken&q=$query") {
             contentType(ContentType.Application.Json)
         }
 }

@@ -11,7 +11,7 @@ class VideoSearchRepositoryImpl : VideoSearchRepository, KoinComponent {
 
     private val searchHistoryDatabase: SearchHistoryDatabase by inject()
 
-    override suspend fun searchYoutube(query: String) = youtubeAPI.searchData(query)
+    override suspend fun searchYoutube(query: String, pageToken: String) = youtubeAPI.searchData(query, pageToken)
 
     override suspend fun insertHistory(history: SearchHistory) = searchHistoryDatabase.insert(history)
 

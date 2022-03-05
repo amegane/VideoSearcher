@@ -27,7 +27,9 @@ fun VideoSearcherContent() {
     NavHost(navController = navController, startDestination = Screen.Home.route) {
         composable(Screen.Home.route) {
             val searchHistoryStore = getKoinInstance<SearchHistoryStore>()
-            HomeScreen(searchHistoryStore, navController)
+            HomeScreen(searchHistoryStore) {
+                navController.navigate("${Screen.SearchResult.route}/$it")
+            }
         }
         composable(
             "${Screen.SearchResult.route}/{query}",
