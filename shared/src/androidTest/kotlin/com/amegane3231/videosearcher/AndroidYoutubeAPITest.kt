@@ -1,6 +1,5 @@
 package com.amegane3231.videosearcher
 
-import com.amegane3231.videosearcher.data.search.SearchResult
 import com.amegane3231.videosearcher.data.youtube.DetailThumbnail
 import com.amegane3231.videosearcher.data.youtube.PageInfo
 import com.amegane3231.videosearcher.data.youtube.Thumbnails
@@ -229,13 +228,13 @@ class AndroidYoutubeAPITest {
             }
             io {
                 flow.collect {
-                    Dispatcher.dispatch(SearchAction.FetchDataSucceeded(SearchResult.YoutubeData(it)))
+                    Dispatcher.dispatch(SearchAction.FetchYoutubeDataSucceeded(it))
                 }
             }
         }
 
         creator.searchData("TEST")
-        assertTrue { store.youtubeData.value.instanceOf(SearchAction.FetchDataSucceeded::class) }
+        assertTrue { store.youtubeData.value.instanceOf(SearchAction.FetchYoutubeDataSucceeded::class) }
     }
 
     private fun io(block: suspend CoroutineScope.() -> Unit) =

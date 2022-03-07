@@ -1,6 +1,5 @@
 package com.amegane3231.videosearcher.flux.search
 
-import com.amegane3231.videosearcher.data.search.SearchResult
 import com.amegane3231.videosearcher.flux.core.Dispatcher
 import com.amegane3231.videosearcher.usecase.SearchYoutubeUseCase
 import kotlinx.coroutines.CoroutineScope
@@ -26,7 +25,7 @@ class SearchActionCreatorImpl : SearchActionCreator, CoroutineScope, KoinCompone
                     dispatcher.dispatch(SearchAction.FetchDataFailed(it))
                 }
                 .collect {
-                    dispatcher.dispatch(SearchAction.FetchDataSucceeded(SearchResult.YoutubeData(it)))
+                    dispatcher.dispatch(SearchAction.FetchYoutubeDataSucceeded(it))
                 }
         }
     }
