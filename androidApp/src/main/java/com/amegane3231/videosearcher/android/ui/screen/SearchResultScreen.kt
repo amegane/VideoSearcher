@@ -14,58 +14,51 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import com.amegane3231.videosearcher.android.R
 import com.amegane3231.videosearcher.android.ui.components.VideoListColumn
-import com.amegane3231.videosearcher.flux.search.SearchAction
+import com.amegane3231.videosearcher.di.getKoinInstance
+import com.amegane3231.videosearcher.flux.search.SearchActionCreator
 import com.amegane3231.videosearcher.flux.search.SearchStore
 import com.google.accompanist.insets.navigationBarsPadding
 import com.google.accompanist.insets.statusBarsPadding
 
 @Composable
 fun SearchResultScreen(store: SearchStore, query: String) {
-    val searchResult by store.youtubeData.collectAsState()
+    val youtubeData by store.youtubeData.collectAsState()
 
-    when (searchResult) {
-        is SearchAction.FetchDataFailed -> {
+    val youtubePageToken by store.youtubePageToken.collectAsState()
+
+    val youtubeError by store.youtubeError.collectAsState(null)
+
+    val searchActionCreator: SearchActionCreator = getKoinInstance()
+
+    if (youtubeError != null) {
+        Column(
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.fillMaxSize()
+        ) {
+            Text(text = stringResource(R.string.msg_failed_data), textAlign = TextAlign.Center)
+        }
+    } else {
+        if (youtubeData.isEmpty()) {
             Column(
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier.fillMaxSize()
+                modifier = Modifier
+                    .fillMaxSize()
+                    .statusBarsPadding()
+                    .navigationBarsPadding()
             ) {
-                Text(text = stringResource(R.string.msg_failed_data), textAlign = TextAlign.Center)
+                CircularProgressIndicator()
             }
-        }
-        is SearchAction.FetchDataSucceeded -> {
+        } else {
             VideoListColumn(
-                data = (searchResult as SearchAction.FetchDataSucceeded).data,
-                onAppearLastItem = { },
+                searchResult = youtubeData,
+                onAppearLastItem = { searchActionCreator.searchData(query, youtubePageToken) },
                 modifier = Modifier
                     .fillMaxSize()
                     .statusBarsPadding()
                     .navigationBarsPadding()
             )
-        }
-        is SearchAction.FetchDataWaiting -> {
-            Column(
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier
-                    .fillMaxSize()
-                    .statusBarsPadding()
-                    .navigationBarsPadding()
-            ) {
-                CircularProgressIndicator()
-            }
-        }
-        is SearchAction.Standby -> {
-            Column(
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier
-                    .fillMaxSize()
-                    .statusBarsPadding()
-                    .navigationBarsPadding()
-            ) {
-                CircularProgressIndicator()
-            }
         }
     }
 }
