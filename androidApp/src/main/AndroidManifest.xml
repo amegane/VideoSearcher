@@ -12,6 +12,7 @@
         <activity
             android:name="com.amegane3231.videosearcher.android.ui.activities.MainActivity"
             android:exported="true"
+            android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
