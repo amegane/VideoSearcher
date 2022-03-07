@@ -29,13 +29,11 @@ actual class SearchHistoryStoreImpl : SearchHistoryStore, ViewModel(), Coroutine
     }
 
     private fun subscribe() {
-        dispatcher.observer.subscribe(
+        dispatcher.on(SearchHistoryAction.GetSearchHistoryList::class).subscribe(
             isThreadLocal = true,
             onNext = {
-                if (it is SearchHistoryAction.GetSearchHistoryList) {
-                    launch {
-                        _searchHistoryList.emit(it.list)
-                    }
+                launch {
+                    _searchHistoryList.emit(it.list)
                 }
             },
             onComplete = { }
