@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.Card
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -18,7 +19,11 @@ import coil.compose.rememberImagePainter
 @Composable
 fun VideoOverviewRow(imageUrl: String, videoTitle: String, modifier: Modifier = Modifier) {
     val painter = rememberImagePainter(data = imageUrl)
-    Card {
+
+    Card(
+        backgroundColor = MaterialTheme.colors.background,
+        modifier = modifier
+    ) {
         Row(modifier = modifier) {
             Image(
                 painter = painter,

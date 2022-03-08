@@ -30,6 +30,8 @@ fun SearchResultScreen(store: SearchStore, query: String) {
 
     val searchActionCreator: SearchActionCreator = getKoinInstance()
 
+    val resultLimit = 50
+
     if (youtubeError != null) {
         Column(
             verticalArrangement = Arrangement.Center,
@@ -53,7 +55,11 @@ fun SearchResultScreen(store: SearchStore, query: String) {
         } else {
             VideoListColumn(
                 searchResult = youtubeData,
-                onAppearLastItem = { searchActionCreator.searchData(query, youtubePageToken) },
+                onAppearLastItem = {
+                    if (youtubeData.size < resultLimit) {
+                        searchActionCreator.searchData(query, youtubePageToken)
+                    }
+                },
                 modifier = Modifier
                     .fillMaxSize()
                     .statusBarsPadding()
