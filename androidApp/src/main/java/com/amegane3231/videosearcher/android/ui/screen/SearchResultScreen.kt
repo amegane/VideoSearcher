@@ -15,6 +15,7 @@ import androidx.compose.ui.text.style.TextAlign
 import com.amegane3231.videosearcher.android.R
 import com.amegane3231.videosearcher.android.ui.components.VideoListColumn
 import com.amegane3231.videosearcher.di.getKoinInstance
+import com.amegane3231.videosearcher.flux.search.SearchAction
 import com.amegane3231.videosearcher.flux.search.SearchActionCreator
 import com.amegane3231.videosearcher.flux.search.SearchStore
 import com.google.accompanist.insets.navigationBarsPadding
@@ -26,22 +27,38 @@ fun SearchResultScreen(store: SearchStore, query: String) {
 
     val youtubePageToken by store.youtubePageToken.collectAsState()
 
-    val youtubeError by store.youtubeError.collectAsState(null)
+    val youtubeSearchState by store.youtubeSearchState.collectAsState()
 
     val searchActionCreator: SearchActionCreator = getKoinInstance()
 
     val resultLimit = 50
 
-    if (youtubeError != null) {
-        Column(
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.fillMaxSize()
-        ) {
-            Text(text = stringResource(R.string.msg_failed_data), textAlign = TextAlign.Center)
+    when (youtubeSearchState) {
+        is SearchAction.FetchDataFailed -> {
+            Column(
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier.fillMaxSize()
+            ) {
+                Text(text = stringResource(R.string.msg_failed_data), textAlign = TextAlign.Center)
+            }
         }
-    } else {
-        if (youtubeData.isEmpty()) {
+        is SearchAction.FetchDataWaiting -> {
+            if (youtubeData.isNotEmpty()) {
+                VideoListColumn(
+                    searchResult = youtubeData,
+                    onAppearLastItem = {
+                        if (youtubeData.size < resultLimit) {
+                            searchActionCreator.searchData(query, youtubePageToken)
+                        }
+                    },
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .statusBarsPadding()
+                        .navigationBarsPadding()
+                )
+                return
+            }
             Column(
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally,
@@ -52,7 +69,8 @@ fun SearchResultScreen(store: SearchStore, query: String) {
             ) {
                 CircularProgressIndicator()
             }
-        } else {
+        }
+        is SearchAction.FetchYoutubeDataSucceeded -> {
             VideoListColumn(
                 searchResult = youtubeData,
                 onAppearLastItem = {
@@ -65,6 +83,8 @@ fun SearchResultScreen(store: SearchStore, query: String) {
                     .statusBarsPadding()
                     .navigationBarsPadding()
             )
+        }
+        is SearchAction.Standby -> {
         }
     }
 }

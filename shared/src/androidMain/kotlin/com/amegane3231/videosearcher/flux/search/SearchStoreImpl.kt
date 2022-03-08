@@ -1,18 +1,14 @@
 package com.amegane3231.videosearcher.flux.search
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.amegane3231.videosearcher.data.youtube.YoutubeVideoResource
 import com.amegane3231.videosearcher.flux.core.Dispatcher
 import com.badoo.reaktive.observable.subscribe
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -30,39 +26,42 @@ actual class SearchStoreImpl : SearchStore, ViewModel(), CoroutineScope, KoinCom
 
     actual override val youtubePageToken: StateFlow<String> = _youtubePageToken
 
-    private val _youtubeError: MutableSharedFlow<Throwable> = MutableSharedFlow()
+    private val _youtubeSearchState: MutableStateFlow<SearchAction> =
+        MutableStateFlow(SearchAction.Standby())
 
-    actual override val youtubeError: SharedFlow<Throwable> = _youtubeError
+    actual override val youtubeSearchState: StateFlow<SearchAction> = _youtubeSearchState
 
     override val coroutineContext: CoroutineContext = Dispatchers.IO + Job()
 
     init {
-        subscribeYoutubeData()
-        subscribeYoutubeError()
-        youtubeError.launchIn(viewModelScope)
+        subscribeYoutubeSearchState()
+        subscribeClearVideoList()
     }
 
-    private fun subscribeYoutubeData() {
-        dispatcher.on(SearchAction.FetchYoutubeDataSucceeded::class)
+    private fun subscribeYoutubeSearchState() {
+        dispatcher.on(SearchAction::class)
             .subscribe(
                 isThreadLocal = true,
                 onNext = {
                     launch {
-                        val current = _youtubeData.value
-                        _youtubeData.emit(current + it.data.items)
-                        _youtubePageToken.emit(it.data.nextPageToken)
+                        _youtubeSearchState.emit(it)
+                        if (it is SearchAction.FetchYoutubeDataSucceeded) {
+                            val current = _youtubeData.value
+                            _youtubeData.emit(current + it.data.items)
+                            _youtubePageToken.emit(it.data.nextPageToken)
+                        }
                     }
                 }
             )
     }
 
-    private fun subscribeYoutubeError() {
-        dispatcher.on(SearchAction.FetchDataFailed::class)
+    private fun subscribeClearVideoList() {
+        dispatcher.on(ClearAction.ClearVideoList::class)
             .subscribe(
                 isThreadLocal = true,
                 onNext = {
                     launch {
-                        _youtubeError.emit(it.throwable)
+                        _youtubeData.emit(listOf())
                     }
                 }
             )

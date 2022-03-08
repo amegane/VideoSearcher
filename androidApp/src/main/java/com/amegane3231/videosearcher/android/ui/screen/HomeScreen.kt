@@ -71,6 +71,7 @@ fun HomeScreen(store: SearchHistoryStore, navigate: (String) -> Unit) {
                 if (it.isBlank()) return@SearchBar
                 navigate(it)
                 searchHistoryActionCreator.insertSearchHistory(it)
+                searchActionCreator.clearSearchData()
                 searchActionCreator.searchData(it)
             },
             modifier = Modifier
@@ -82,6 +83,7 @@ fun HomeScreen(store: SearchHistoryStore, navigate: (String) -> Unit) {
                 searchHistoryList = searchHistoryList,
                 onSearch = {
                     navigate(it)
+                    searchActionCreator.clearSearchData()
                     searchActionCreator.searchData(it)
                 },
                 modifier = Modifier.imePadding()

@@ -29,4 +29,8 @@ class SearchActionCreatorImpl : SearchActionCreator, CoroutineScope, KoinCompone
                 }
         }
     }
+
+    override fun clearSearchData() {
+        dispatcher.dispatch(ClearAction.ClearVideoList())
+    }
 }
