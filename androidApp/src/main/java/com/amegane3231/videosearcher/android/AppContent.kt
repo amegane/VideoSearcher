@@ -1,5 +1,6 @@
 package com.amegane3231.videosearcher.android
 
+import android.util.Log
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -24,9 +25,13 @@ import com.google.accompanist.insets.ProvideWindowInsets
 @Composable
 fun VideoSearcherContent() {
     val navController = rememberNavController()
+
+    val searchStore = getKoinInstance<SearchStore>()
+
+    val searchHistoryStore = getKoinInstance<SearchHistoryStore>()
+
     NavHost(navController = navController, startDestination = Screen.Home.route) {
         composable(Screen.Home.route) {
-            val searchHistoryStore = getKoinInstance<SearchHistoryStore>()
             HomeScreen(searchHistoryStore) {
                 navController.navigate("${Screen.SearchResult.route}/$it")
             }
@@ -35,8 +40,8 @@ fun VideoSearcherContent() {
             "${Screen.SearchResult.route}/{query}",
             listOf(navArgument("query") { type = NavType.StringType })
         ) {
-            val searchStore = getKoinInstance<SearchStore>()
             val query = requireNotNull(it.arguments?.getString("query"))
+            Log.d("YEAH", query)
             SearchResultScreen(searchStore, query)
         }
     }
