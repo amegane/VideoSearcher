@@ -15,9 +15,9 @@ import androidx.compose.ui.text.style.TextAlign
 import com.amegane3231.videosearcher.android.R
 import com.amegane3231.videosearcher.android.ui.components.VideoListColumn
 import com.amegane3231.videosearcher.di.getKoinInstance
-import com.amegane3231.videosearcher.flux.search.SearchAction
-import com.amegane3231.videosearcher.flux.search.SearchActionCreator
-import com.amegane3231.videosearcher.flux.search.SearchStore
+import com.amegane3231.videosearcher.flux.search.action.SearchAction
+import com.amegane3231.videosearcher.flux.search.action.SearchActionCreator
+import com.amegane3231.videosearcher.flux.search.store.SearchStore
 import com.google.accompanist.insets.navigationBarsPadding
 import com.google.accompanist.insets.statusBarsPadding
 

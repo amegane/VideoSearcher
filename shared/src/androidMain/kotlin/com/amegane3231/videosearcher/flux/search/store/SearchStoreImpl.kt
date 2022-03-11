@@ -1,8 +1,10 @@
-package com.amegane3231.videosearcher.flux.search
+package com.amegane3231.videosearcher.flux.search.store
 
 import androidx.lifecycle.ViewModel
 import com.amegane3231.videosearcher.data.youtube.YoutubeVideoResource
 import com.amegane3231.videosearcher.flux.core.Dispatcher
+import com.amegane3231.videosearcher.flux.search.action.ClearAction
+import com.amegane3231.videosearcher.flux.search.action.SearchAction
 import com.badoo.reaktive.observable.subscribe
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -39,7 +41,7 @@ actual class SearchStoreImpl : SearchStore, ViewModel(), CoroutineScope, KoinCom
     }
 
     private fun subscribeYoutubeSearchState() {
-        dispatcher.on(SearchAction::class)
+        Dispatcher.on(SearchAction::class)
             .subscribe(
                 isThreadLocal = true,
                 onNext = {
@@ -56,7 +58,7 @@ actual class SearchStoreImpl : SearchStore, ViewModel(), CoroutineScope, KoinCom
     }
 
     private fun subscribeClearVideoList() {
-        dispatcher.on(ClearAction.ClearVideoList::class)
+        Dispatcher.on(ClearAction.ClearVideoList::class)
             .subscribe(
                 isThreadLocal = true,
                 onNext = {

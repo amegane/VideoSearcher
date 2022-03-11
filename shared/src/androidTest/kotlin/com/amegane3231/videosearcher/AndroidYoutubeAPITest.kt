@@ -9,9 +9,9 @@ import com.amegane3231.videosearcher.data.youtube.YoutubeVideoResource
 import com.amegane3231.videosearcher.data.youtube.YoutubeVideoSnippet
 import com.amegane3231.videosearcher.di.initKoin
 import com.amegane3231.videosearcher.flux.core.Dispatcher
-import com.amegane3231.videosearcher.flux.search.SearchAction
-import com.amegane3231.videosearcher.flux.search.SearchActionCreatorImpl
-import com.amegane3231.videosearcher.flux.search.SearchStoreImpl
+import com.amegane3231.videosearcher.flux.search.action.SearchAction
+import com.amegane3231.videosearcher.flux.search.action.SearchActionCreatorImpl
+import com.amegane3231.videosearcher.flux.search.store.SearchStoreImpl
 import io.ktor.util.reflect.instanceOf
 import io.mockk.every
 import io.mockk.mockkObject

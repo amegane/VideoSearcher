@@ -20,9 +20,9 @@ import androidx.compose.ui.unit.dp
 import com.amegane3231.videosearcher.android.ui.components.SearchBar
 import com.amegane3231.videosearcher.android.ui.components.SearchHistoriesColumn
 import com.amegane3231.videosearcher.di.getKoinInstance
-import com.amegane3231.videosearcher.flux.search.SearchActionCreator
-import com.amegane3231.videosearcher.flux.search.SearchHistoryActionCreator
-import com.amegane3231.videosearcher.flux.search.SearchHistoryStore
+import com.amegane3231.videosearcher.flux.search.action.SearchActionCreator
+import com.amegane3231.videosearcher.flux.search.action.SearchHistoryActionCreator
+import com.amegane3231.videosearcher.flux.search.store.SearchHistoryStore
 import com.google.accompanist.insets.LocalWindowInsets
 import com.google.accompanist.insets.imePadding
 import com.google.accompanist.insets.statusBarsPadding

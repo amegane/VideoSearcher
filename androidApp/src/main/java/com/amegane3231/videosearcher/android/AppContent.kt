@@ -17,8 +17,8 @@ import com.amegane3231.videosearcher.android.ui.screen.Screen
 import com.amegane3231.videosearcher.android.ui.screen.SearchResultScreen
 import com.amegane3231.videosearcher.android.ui.theme.MovieSearcherTheme
 import com.amegane3231.videosearcher.di.getKoinInstance
-import com.amegane3231.videosearcher.flux.search.SearchHistoryStore
-import com.amegane3231.videosearcher.flux.search.SearchStore
+import com.amegane3231.videosearcher.flux.search.store.SearchHistoryStore
+import com.amegane3231.videosearcher.flux.search.store.SearchStore
 import com.google.accompanist.insets.ProvideWindowInsets
 
 @OptIn(ExperimentalComposeUiApi::class)

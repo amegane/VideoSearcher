@@ -1,8 +1,9 @@
-package com.amegane3231.videosearcher.flux.search
+package com.amegane3231.videosearcher.flux.search.store
 
 import androidx.lifecycle.ViewModel
 import com.amegane3231.videosearcher.data.search.SearchHistory
 import com.amegane3231.videosearcher.flux.core.Dispatcher
+import com.amegane3231.videosearcher.flux.search.action.SearchHistoryAction
 import com.badoo.reaktive.observable.subscribe
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -14,7 +15,11 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import kotlin.coroutines.CoroutineContext
 
-actual class SearchHistoryStoreImpl : SearchHistoryStore, ViewModel(), CoroutineScope, KoinComponent {
+actual class SearchHistoryStoreImpl :
+    SearchHistoryStore,
+    ViewModel(),
+    CoroutineScope,
+    KoinComponent {
     actual override val dispatcher: Dispatcher by inject()
 
     private val _searchHistoryList: MutableStateFlow<List<SearchHistory>> =
@@ -29,7 +34,7 @@ actual class SearchHistoryStoreImpl : SearchHistoryStore, ViewModel(), Coroutine
     }
 
     private fun subscribe() {
-        dispatcher.on(SearchHistoryAction.GetSearchHistoryList::class).subscribe(
+        Dispatcher.on(SearchHistoryAction.GetSearchHistoryList::class).subscribe(
             isThreadLocal = true,
             onNext = {
                 launch {
