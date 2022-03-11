@@ -15,7 +15,10 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import kotlin.coroutines.CoroutineContext
 
-actual class SearchHistoryStoreImpl : SearchHistoryStore, ViewModel(), CoroutineScope,
+actual class SearchHistoryStoreImpl :
+    SearchHistoryStore,
+    ViewModel(),
+    CoroutineScope,
     KoinComponent {
     actual override val dispatcher: Dispatcher by inject()
 
