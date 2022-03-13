@@ -1,6 +1,5 @@
 package com.amegane3231.videosearcher.android
 
-import android.util.Log
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -41,7 +40,6 @@ fun VideoSearcherContent() {
             listOf(navArgument("query") { type = NavType.StringType })
         ) {
             val query = requireNotNull(it.arguments?.getString("query"))
-            Log.d("YEAH", query)
             SearchResultScreen(searchStore, query)
         }
     }
