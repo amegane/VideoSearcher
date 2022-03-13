@@ -2,6 +2,7 @@ package com.amegane3231.videosearcher.repository
 
 import com.amegane3231.videosearcher.api.YoutubeApi
 import com.amegane3231.videosearcher.data.search.SearchHistory
+import com.amegane3231.videosearcher.data.youtube.YoutubeSearchedData
 import com.amegane3231.videosearcher.database.SearchHistoryDatabase
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -12,6 +13,8 @@ class VideoSearchRepositoryImpl : VideoSearchRepository, KoinComponent {
     private val searchHistoryDatabase: SearchHistoryDatabase by inject()
 
     override suspend fun searchYoutube(query: String, pageToken: String) = youtubeAPI.searchData(query, pageToken)
+
+    override suspend fun getYoutubeVideoData(videoId: String): YoutubeSearchedData = youtubeAPI.getVideoData(videoId)
 
     override suspend fun insertHistory(history: SearchHistory) = searchHistoryDatabase.insert(history)
 

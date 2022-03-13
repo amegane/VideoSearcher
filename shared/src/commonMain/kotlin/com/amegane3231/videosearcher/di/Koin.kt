@@ -5,6 +5,8 @@ import com.amegane3231.videosearcher.api.YoutubeApiImpl
 import com.amegane3231.videosearcher.database.SearchHistoryDatabase
 import com.amegane3231.videosearcher.database.SearchHistoryDatabaseImpl
 import com.amegane3231.videosearcher.flux.core.Dispatcher
+import com.amegane3231.videosearcher.flux.search.action.GetVideoDataActionCreator
+import com.amegane3231.videosearcher.flux.search.action.GetVideoDataActionCreatorImpl
 import com.amegane3231.videosearcher.flux.search.action.SearchActionCreator
 import com.amegane3231.videosearcher.flux.search.action.SearchActionCreatorImpl
 import com.amegane3231.videosearcher.flux.search.action.SearchHistoryActionCreator
@@ -17,6 +19,8 @@ import com.amegane3231.videosearcher.repository.VideoSearchRepository
 import com.amegane3231.videosearcher.repository.VideoSearchRepositoryImpl
 import com.amegane3231.videosearcher.usecase.GetSearchHistoriesUseCase
 import com.amegane3231.videosearcher.usecase.GetSearchHistoriesUseCaseImpl
+import com.amegane3231.videosearcher.usecase.GetYoutubeVideoDataUseCase
+import com.amegane3231.videosearcher.usecase.GetYoutubeVideoDataUseCaseImpl
 import com.amegane3231.videosearcher.usecase.InsertSearchHistoryUseCase
 import com.amegane3231.videosearcher.usecase.InsertSearchHistoryUseCaseImpl
 import com.amegane3231.videosearcher.usecase.SearchYoutubeUseCase
@@ -38,10 +42,12 @@ val commonModule = module {
     single { SearchHistoryDatabaseImpl() as SearchHistoryDatabase }
     single { VideoSearchRepositoryImpl() as VideoSearchRepository }
     factory { SearchYoutubeUseCaseImpl() as SearchYoutubeUseCase }
+    factory { GetYoutubeVideoDataUseCaseImpl() as GetYoutubeVideoDataUseCase }
     factory { InsertSearchHistoryUseCaseImpl() as InsertSearchHistoryUseCase }
     factory { GetSearchHistoriesUseCaseImpl() as GetSearchHistoriesUseCase }
     factory { SearchActionCreatorImpl() as SearchActionCreator }
     factory { SearchHistoryActionCreatorImpl() as SearchHistoryActionCreator }
+    factory { GetVideoDataActionCreatorImpl() as GetVideoDataActionCreator }
     factory { SearchStoreImpl() as SearchStore }
     factory { SearchHistoryStoreImpl() as SearchHistoryStore }
 }
