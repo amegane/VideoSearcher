@@ -6,6 +6,8 @@ import com.amegane3231.videosearcher.data.youtube.YoutubeSearchedData
 interface VideoSearchRepository {
     suspend fun searchYoutube(query: String, pageToken: String): YoutubeSearchedData
 
+    suspend fun getYoutubeVideoData(videoId: String): YoutubeSearchedData
+
     suspend fun insertHistory(history: SearchHistory)
 
     suspend fun searchHistory(query: String): List<SearchHistory>

@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.amegane3231.videosearcher.data.youtube.YoutubeVideoResource
 import com.amegane3231.videosearcher.flux.core.Dispatcher
 import com.amegane3231.videosearcher.flux.search.action.ClearAction
+import com.amegane3231.videosearcher.flux.search.action.GetVideoDataAction
 import com.amegane3231.videosearcher.flux.search.action.SearchAction
 import com.badoo.reaktive.observable.subscribe
 import kotlinx.coroutines.CoroutineScope
@@ -33,11 +34,18 @@ actual class SearchStoreImpl : SearchStore, ViewModel(), CoroutineScope, KoinCom
 
     actual override val youtubeSearchState: StateFlow<SearchAction> = _youtubeSearchState
 
+    private val _selectedYoutubeVideoDetail: MutableStateFlow<GetVideoDataAction> =
+        MutableStateFlow(GetVideoDataAction.Standby())
+
+    actual override val selectedYoutubeVideoDetail: StateFlow<GetVideoDataAction> =
+        _selectedYoutubeVideoDetail
+
     override val coroutineContext: CoroutineContext = Dispatchers.IO + Job()
 
     init {
         subscribeYoutubeSearchState()
         subscribeClearVideoList()
+        subscribeSelectedYoutubeData()
     }
 
     private fun subscribeYoutubeSearchState() {
@@ -64,6 +72,18 @@ actual class SearchStoreImpl : SearchStore, ViewModel(), CoroutineScope, KoinCom
                 onNext = {
                     launch {
                         _youtubeData.emit(listOf())
+                    }
+                }
+            )
+    }
+
+    private fun subscribeSelectedYoutubeData() {
+        Dispatcher.on(GetVideoDataAction::class)
+            .subscribe(
+                isThreadLocal = true,
+                onNext = {
+                    launch {
+                        _selectedYoutubeVideoDetail.emit(it)
                     }
                 }
             )
