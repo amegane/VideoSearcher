@@ -101,6 +101,6 @@ class RectTransformation(
 
     override fun toString(): String {
         return "SquareTransformation(left=$left, top=$top, " +
-            "edgeWidth=$right, edgeHeight=$bottom)"
+            "right=$right, bottom=$bottom)"
     }
 }
