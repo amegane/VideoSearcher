@@ -14,13 +14,20 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import com.amegane3231.videosearcher.data.youtube.YoutubeVideoResource
+import com.amegane3231.videosearcher.di.getKoinInstance
+import com.amegane3231.videosearcher.flux.search.action.GetVideoDataAction
+import com.amegane3231.videosearcher.flux.search.action.GetVideoDataActionCreator
 import com.google.accompanist.insets.navigationBarsPadding
 import com.google.accompanist.insets.statusBarsPadding
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun VideoDetailContent(searchResult: List<YoutubeVideoResource>, onAppearLastItem: () -> Unit) {
+fun VideoDetailContent(
+    searchResults: List<YoutubeVideoResource>,
+    videoDetail: GetVideoDataAction,
+    onAppearLastItem: () -> Unit
+) {
     val sheetState = rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden)
 
     val scope = rememberCoroutineScope()
@@ -29,19 +36,15 @@ fun VideoDetailContent(searchResult: List<YoutubeVideoResource>, onAppearLastIte
 
     ModalBottomSheetLayout(sheetState = sheetState, sheetContent = {
         if (selectedIndex >= 0) {
-            val videoDetail = searchResult[selectedIndex]
-            VideoDetailBottomSheetContent(
-                videoId = videoDetail.id.videoId,
-                title = videoDetail.snippet.title,
-                detail = videoDetail.snippet.description,
-                imageUrl = videoDetail.snippet.thumbnails.high.url
-            )
+            VideoDetailBottomSheetContent(videoDetail)
         }
         Text(text = "")
     }) {
         VideoListColumn(
-            searchResult = searchResult,
+            searchResults = searchResults,
             onClick = {
+                val getVideoDataActionCreator: GetVideoDataActionCreator = getKoinInstance()
+                getVideoDataActionCreator.getYoutubeVideoData(searchResults[it].id.videoId)
                 selectedIndex = it
                 scope.launch { sheetState.show() }
             },
