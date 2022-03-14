@@ -2,6 +2,7 @@ package com.amegane3231.videosearcher.api
 
 import com.amegane3231.videosearcher.BuildConfig
 import com.amegane3231.videosearcher.data.youtube.YoutubeSearchedData
+import com.amegane3231.videosearcher.data.youtube.YoutubeVideoDetailData
 import io.ktor.client.request.get
 import io.ktor.http.ContentType
 import io.ktor.http.contentType
@@ -16,7 +17,7 @@ class YoutubeApiImpl : YoutubeApi, KoinComponent {
         }
 
     override suspend fun getVideoData(videoId: String) =
-        apiClient.client.get<YoutubeSearchedData>("https://www.googleapis.com/youtube/v3/videos?key=${BuildConfig.youtubeApiKey}&part=snippet&id=$videoId") {
+        apiClient.client.get<YoutubeVideoDetailData>("https://www.googleapis.com/youtube/v3/videos?key=${BuildConfig.youtubeApiKey}&part=snippet&id=$videoId") {
             contentType(ContentType.Application.Json)
         }
 }

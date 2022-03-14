@@ -1,5 +1,6 @@
 package com.amegane3231.videosearcher.flux.search.action
 
+import android.util.Log
 import com.amegane3231.videosearcher.flux.core.Dispatcher
 import com.amegane3231.videosearcher.usecase.GetYoutubeVideoDataUseCase
 import kotlinx.coroutines.CoroutineScope
@@ -22,6 +23,7 @@ class GetVideoDataActionCreatorImpl : GetVideoDataActionCreator, CoroutineScope,
         launch {
             getYoutubeVideoDataUseCase(videoId)
                 .catch {
+                    Log.e("Exception", it.message.toString())
                     dispatcher.dispatch(GetVideoDataAction.FetchDataFailed(it))
                 }
                 .collect {
