@@ -1,6 +1,6 @@
 package com.amegane3231.videosearcher.flux.search.action
 
-import com.amegane3231.videosearcher.data.search.SearchHistory
+import com.amegane3231.videosearcher.data.history.SearchHistory
 import com.amegane3231.videosearcher.flux.core.Action
 
 sealed class SearchHistoryAction : Action {

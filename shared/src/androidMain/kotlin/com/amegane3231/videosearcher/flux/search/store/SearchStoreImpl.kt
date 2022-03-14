@@ -49,7 +49,7 @@ actual class SearchStoreImpl : SearchStore, ViewModel(), CoroutineScope, KoinCom
     }
 
     private fun subscribeYoutubeSearchState() {
-        Dispatcher.on(SearchAction::class)
+        dispatcher.on(SearchAction::class)
             .subscribe(
                 isThreadLocal = true,
                 onNext = {
@@ -66,7 +66,7 @@ actual class SearchStoreImpl : SearchStore, ViewModel(), CoroutineScope, KoinCom
     }
 
     private fun subscribeClearVideoList() {
-        Dispatcher.on(ClearAction.ClearVideoList::class)
+        dispatcher.on(ClearAction.ClearVideoList::class)
             .subscribe(
                 isThreadLocal = true,
                 onNext = {
@@ -78,7 +78,7 @@ actual class SearchStoreImpl : SearchStore, ViewModel(), CoroutineScope, KoinCom
     }
 
     private fun subscribeSelectedYoutubeData() {
-        Dispatcher.on(GetVideoDataAction::class)
+        dispatcher.on(GetVideoDataAction::class)
             .subscribe(
                 isThreadLocal = true,
                 onNext = {

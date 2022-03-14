@@ -1,6 +1,6 @@
 package com.amegane3231.videosearcher.database
 
-import com.amegane3231.videosearcher.data.search.SearchHistory
+import com.amegane3231.videosearcher.data.history.SearchHistory
 
 interface SearchHistoryDatabase {
     suspend fun insert(history: SearchHistory)

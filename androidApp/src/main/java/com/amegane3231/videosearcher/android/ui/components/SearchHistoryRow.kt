@@ -13,7 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.amegane3231.videosearcher.android.R
-import com.amegane3231.videosearcher.data.search.SearchHistory
+import com.amegane3231.videosearcher.data.history.SearchHistory
 
 @Composable
 fun SearchHistoryRow(history: SearchHistory, modifier: Modifier = Modifier) {

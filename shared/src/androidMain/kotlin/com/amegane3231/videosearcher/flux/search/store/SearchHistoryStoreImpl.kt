@@ -1,7 +1,7 @@
 package com.amegane3231.videosearcher.flux.search.store
 
 import androidx.lifecycle.ViewModel
-import com.amegane3231.videosearcher.data.search.SearchHistory
+import com.amegane3231.videosearcher.data.history.SearchHistory
 import com.amegane3231.videosearcher.flux.core.Dispatcher
 import com.amegane3231.videosearcher.flux.search.action.SearchHistoryAction
 import com.badoo.reaktive.observable.subscribe
@@ -30,11 +30,11 @@ actual class SearchHistoryStoreImpl :
     override val coroutineContext: CoroutineContext = Dispatchers.IO + Job()
 
     init {
-        subscribe()
+        subscribeSearchHistory()
     }
 
-    private fun subscribe() {
-        Dispatcher.on(SearchHistoryAction.GetSearchHistoryList::class).subscribe(
+    private fun subscribeSearchHistory() {
+        dispatcher.on(SearchHistoryAction.GetSearchHistoryList::class).subscribe(
             isThreadLocal = true,
             onNext = {
                 launch {

@@ -1,6 +1,6 @@
 package com.amegane3231.videosearcher.usecase
 
-import com.amegane3231.videosearcher.data.search.SearchHistory
+import com.amegane3231.videosearcher.data.history.SearchHistory
 import com.amegane3231.videosearcher.repository.VideoSearchRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
