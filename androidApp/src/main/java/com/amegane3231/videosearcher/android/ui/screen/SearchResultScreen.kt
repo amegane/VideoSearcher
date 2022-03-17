@@ -25,11 +25,13 @@ import com.google.accompanist.insets.statusBarsPadding
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun SearchResultScreen(store: SearchStore, query: String) {
-    val youtubeData by store.youtubeData.collectAsState()
+    val searchedYoutubeDataList by store.youtubeData.collectAsState()
 
     val youtubePageToken by store.youtubePageToken.collectAsState()
 
     val youtubeSearchState by store.youtubeSearchState.collectAsState()
+
+    val selectedYoutubeVideoDetail by store.selectedYoutubeVideoDetail.collectAsState()
 
     val searchActionCreator: SearchActionCreator = getKoinInstance()
 
@@ -46,9 +48,12 @@ fun SearchResultScreen(store: SearchStore, query: String) {
             }
         }
         is SearchAction.FetchDataWaiting -> {
-            if (youtubeData.isNotEmpty()) {
-                VideoDetailContent(searchResult = youtubeData) {
-                    if (youtubeData.size < resultLimit) {
+            if (searchedYoutubeDataList.isNotEmpty()) {
+                VideoDetailContent(
+                    searchResults = searchedYoutubeDataList,
+                    videoDetail = selectedYoutubeVideoDetail
+                ) {
+                    if (searchedYoutubeDataList.size < resultLimit) {
                         searchActionCreator.searchData(query, youtubePageToken)
                     }
                 }
@@ -66,8 +71,11 @@ fun SearchResultScreen(store: SearchStore, query: String) {
             }
         }
         is SearchAction.FetchYoutubeDataSucceeded -> {
-            VideoDetailContent(searchResult = youtubeData) {
-                if (youtubeData.size < resultLimit) {
+            VideoDetailContent(
+                searchResults = searchedYoutubeDataList,
+                videoDetail = selectedYoutubeVideoDetail
+            ) {
+                if (searchedYoutubeDataList.size < resultLimit) {
                     searchActionCreator.searchData(query, youtubePageToken)
                 }
             }
