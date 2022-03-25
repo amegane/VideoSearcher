@@ -1,7 +1,7 @@
 package com.amegane3231.videosearcher.flux.search.store
 
 import androidx.lifecycle.ViewModel
-import com.amegane3231.videosearcher.data.youtube.YoutubeVideoResource
+import com.amegane3231.videosearcher.data.video.youtube.YoutubeVideoResource
 import com.amegane3231.videosearcher.flux.core.Dispatcher
 import com.amegane3231.videosearcher.flux.search.action.ClearAction
 import com.amegane3231.videosearcher.flux.search.action.GetVideoDataAction

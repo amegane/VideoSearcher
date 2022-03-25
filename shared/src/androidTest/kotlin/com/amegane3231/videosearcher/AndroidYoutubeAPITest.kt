@@ -1,12 +1,12 @@
 package com.amegane3231.videosearcher
 
-import com.amegane3231.videosearcher.data.youtube.DetailThumbnail
-import com.amegane3231.videosearcher.data.youtube.PageInfo
-import com.amegane3231.videosearcher.data.youtube.Thumbnails
-import com.amegane3231.videosearcher.data.youtube.YoutubeSearchedData
-import com.amegane3231.videosearcher.data.youtube.YoutubeVideoId
-import com.amegane3231.videosearcher.data.youtube.YoutubeVideoResource
-import com.amegane3231.videosearcher.data.youtube.YoutubeVideoSnippet
+import com.amegane3231.videosearcher.data.video.youtube.DetailThumbnail
+import com.amegane3231.videosearcher.data.video.youtube.PageInfo
+import com.amegane3231.videosearcher.data.video.youtube.Thumbnails
+import com.amegane3231.videosearcher.data.video.youtube.YoutubeSearchedData
+import com.amegane3231.videosearcher.data.video.youtube.YoutubeVideoId
+import com.amegane3231.videosearcher.data.video.youtube.YoutubeVideoResource
+import com.amegane3231.videosearcher.data.video.youtube.YoutubeVideoSnippet
 import com.amegane3231.videosearcher.di.initKoin
 import com.amegane3231.videosearcher.flux.core.Dispatcher
 import com.amegane3231.videosearcher.flux.search.action.SearchAction

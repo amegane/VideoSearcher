@@ -1,8 +1,8 @@
 package com.amegane3231.videosearcher.api
 
 import com.amegane3231.videosearcher.BuildConfig
-import com.amegane3231.videosearcher.data.youtube.YoutubeSearchedData
-import com.amegane3231.videosearcher.data.youtube.YoutubeVideoDetailData
+import com.amegane3231.videosearcher.data.video.youtube.YoutubeSearchedData
+import com.amegane3231.videosearcher.data.video.youtube.YoutubeVideoDetailData
 import io.ktor.client.request.get
 import io.ktor.http.ContentType
 import io.ktor.http.contentType

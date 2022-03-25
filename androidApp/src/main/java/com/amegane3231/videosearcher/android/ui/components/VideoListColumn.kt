@@ -15,7 +15,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
-import com.amegane3231.videosearcher.data.youtube.YoutubeVideoResource
+import com.amegane3231.videosearcher.data.video.youtube.YoutubeVideoResource
 import kotlinx.coroutines.flow.collectLatest
 
 @Composable

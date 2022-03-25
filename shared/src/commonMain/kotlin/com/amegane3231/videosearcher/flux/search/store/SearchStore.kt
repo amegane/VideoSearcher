@@ -1,6 +1,6 @@
 package com.amegane3231.videosearcher.flux.search.store
 
-import com.amegane3231.videosearcher.data.youtube.YoutubeVideoResource
+import com.amegane3231.videosearcher.data.video.youtube.YoutubeVideoResource
 import com.amegane3231.videosearcher.flux.core.Dispatcher
 import com.amegane3231.videosearcher.flux.core.Store
 import com.amegane3231.videosearcher.flux.search.action.GetVideoDataAction

@@ -16,7 +16,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.amegane3231.videosearcher.data.youtube.YoutubeVideoResource
+import com.amegane3231.videosearcher.data.video.youtube.YoutubeVideoResource
 import com.amegane3231.videosearcher.di.getKoinInstance
 import com.amegane3231.videosearcher.flux.search.action.GetVideoDataAction
 import com.amegane3231.videosearcher.flux.search.action.GetVideoDataActionCreator
