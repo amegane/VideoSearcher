@@ -20,7 +20,7 @@ import kotlinx.coroutines.flow.collectLatest
 
 @Composable
 fun VideoListColumn(
-    searchResults: List<CommonVideoDetail>,
+    videoList: List<CommonVideoDetail>,
     onClick: (Int) -> Unit,
     onAppearLastItem: () -> Unit,
     modifier: Modifier = Modifier
@@ -48,7 +48,7 @@ fun VideoListColumn(
         state = listState,
         modifier = modifier
     ) {
-        itemsIndexed(searchResults) { index, video ->
+        itemsIndexed(videoList) { index, video ->
             VideoOverviewRow(
                 imageUrl = video.imageUrl,
                 videoTitle = video.title,

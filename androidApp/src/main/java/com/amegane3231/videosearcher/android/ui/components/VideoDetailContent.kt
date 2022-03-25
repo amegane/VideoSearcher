@@ -27,7 +27,7 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun VideoDetailContent(
-    searchResults: List<CommonVideoDetail>,
+    videoList: List<CommonVideoDetail>,
     videoDetail: GetVideoDataAction,
     onAppearLastItem: () -> Unit
 ) {
@@ -48,10 +48,10 @@ fun VideoDetailContent(
         }
     ) {
         VideoListColumn(
-            searchResults = searchResults,
+            videoList = videoList,
             onClick = {
                 val getVideoDataActionCreator: GetVideoDataActionCreator = getKoinInstance()
-                getVideoDataActionCreator.getYoutubeVideoData(searchResults[it].videoId)
+                getVideoDataActionCreator.getYoutubeVideoData(videoList[it].videoId)
                 selectedIndex = it
                 scope.launch { sheetState.show() }
             },

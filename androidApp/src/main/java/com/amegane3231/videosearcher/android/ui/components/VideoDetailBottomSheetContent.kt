@@ -75,7 +75,7 @@ fun VideoDetailBottomSheetContent(getVideoDataState: GetVideoDataAction) {
 
             val title = videoDetail.title
 
-            val detail = videoDetail.description
+            val description = videoDetail.description
 
             val imageUrl = videoDetail.imageUrl
 
@@ -171,7 +171,7 @@ fun VideoDetailBottomSheetContent(getVideoDataState: GetVideoDataAction) {
                 }
 
                 Text(
-                    text = detail,
+                    text = description,
                     modifier = Modifier
                         .fillMaxWidth()
                         .background(White)
