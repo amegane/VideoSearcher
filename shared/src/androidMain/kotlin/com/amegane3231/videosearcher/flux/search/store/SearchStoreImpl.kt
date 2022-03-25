@@ -20,44 +20,44 @@ import kotlin.coroutines.CoroutineContext
 actual class SearchStoreImpl : SearchStore, ViewModel(), CoroutineScope, KoinComponent {
     actual override val dispatcher: Dispatcher by inject()
 
-    private val _youtubeData: MutableStateFlow<List<CommonVideoDetail>> =
+    private val _videoList: MutableStateFlow<List<CommonVideoDetail>> =
         MutableStateFlow(listOf())
 
-    actual override val videoList: StateFlow<List<CommonVideoDetail>> = _youtubeData
+    actual override val videoList: StateFlow<List<CommonVideoDetail>> = _videoList
 
     private val _youtubePageToken: MutableStateFlow<String> = MutableStateFlow("")
 
     actual override val youtubePageToken: StateFlow<String> = _youtubePageToken
 
-    private val _youtubeSearchState: MutableStateFlow<SearchAction> =
+    private val _searchState: MutableStateFlow<SearchAction> =
         MutableStateFlow(SearchAction.Standby())
 
-    actual override val searchState: StateFlow<SearchAction> = _youtubeSearchState
+    actual override val searchState: StateFlow<SearchAction> = _searchState
 
-    private val _selectedYoutubeVideoDetail: MutableStateFlow<GetVideoDataAction> =
+    private val _selectedVideoDetail: MutableStateFlow<GetVideoDataAction> =
         MutableStateFlow(GetVideoDataAction.Standby())
 
     actual override val selectedVideoDetail: StateFlow<GetVideoDataAction> =
-        _selectedYoutubeVideoDetail
+        _selectedVideoDetail
 
     override val coroutineContext: CoroutineContext = Dispatchers.IO + Job()
 
     init {
-        subscribeYoutubeSearchState()
+        subscribeSearchState()
         subscribeClearVideoList()
-        subscribeSelectedYoutubeData()
+        subscribeSelectedVideoData()
     }
 
-    private fun subscribeYoutubeSearchState() {
+    private fun subscribeSearchState() {
         dispatcher.on(SearchAction::class)
             .subscribe(
                 isThreadLocal = true,
                 onNext = {
                     launch {
-                        _youtubeSearchState.emit(it)
+                        _searchState.emit(it)
                         if (it is SearchAction.FetchDataSucceeded) {
-                            val current = _youtubeData.value
-                            _youtubeData.emit(current + it.data.videoDetailList)
+                            val current = _videoList.value
+                            _videoList.emit(current + it.data.videoDetailList)
                             _youtubePageToken.emit(it.data.nextPageToken)
                         }
                     }
@@ -71,19 +71,19 @@ actual class SearchStoreImpl : SearchStore, ViewModel(), CoroutineScope, KoinCom
                 isThreadLocal = true,
                 onNext = {
                     launch {
-                        _youtubeData.emit(listOf())
+                        _videoList.emit(listOf())
                     }
                 }
             )
     }
 
-    private fun subscribeSelectedYoutubeData() {
+    private fun subscribeSelectedVideoData() {
         dispatcher.on(GetVideoDataAction::class)
             .subscribe(
                 isThreadLocal = true,
                 onNext = {
                     launch {
-                        _selectedYoutubeVideoDetail.emit(it)
+                        _selectedVideoDetail.emit(it)
                     }
                 }
             )

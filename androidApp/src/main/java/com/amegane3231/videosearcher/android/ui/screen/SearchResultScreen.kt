@@ -25,19 +25,19 @@ import com.google.accompanist.insets.statusBarsPadding
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun SearchResultScreen(store: SearchStore, query: String) {
-    val searchedYoutubeDataList by store.videoList.collectAsState()
+    val videoList by store.videoList.collectAsState()
 
     val youtubePageToken by store.youtubePageToken.collectAsState()
 
-    val youtubeSearchState by store.searchState.collectAsState()
+    val searchState by store.searchState.collectAsState()
 
-    val selectedYoutubeVideoDetail by store.selectedVideoDetail.collectAsState()
+    val selectedVideoDetail by store.selectedVideoDetail.collectAsState()
 
     val searchActionCreator: SearchActionCreator = getKoinInstance()
 
     val resultLimit = 50
 
-    when (youtubeSearchState) {
+    when (searchState) {
         is SearchAction.FetchDataFailed -> {
             Column(
                 verticalArrangement = Arrangement.Center,
@@ -48,12 +48,12 @@ fun SearchResultScreen(store: SearchStore, query: String) {
             }
         }
         is SearchAction.FetchDataWaiting -> {
-            if (searchedYoutubeDataList.isNotEmpty()) {
+            if (videoList.isNotEmpty()) {
                 VideoDetailContent(
-                    searchResults = searchedYoutubeDataList,
-                    videoDetail = selectedYoutubeVideoDetail
+                    videoList = videoList,
+                    videoDetail = selectedVideoDetail
                 ) {
-                    if (searchedYoutubeDataList.size < resultLimit) {
+                    if (videoList.size < resultLimit) {
                         searchActionCreator.searchData(query, youtubePageToken)
                     }
                 }
@@ -72,10 +72,10 @@ fun SearchResultScreen(store: SearchStore, query: String) {
         }
         is SearchAction.FetchDataSucceeded -> {
             VideoDetailContent(
-                searchResults = searchedYoutubeDataList,
-                videoDetail = selectedYoutubeVideoDetail
+                videoList = videoList,
+                videoDetail = selectedVideoDetail
             ) {
-                if (searchedYoutubeDataList.size < resultLimit) {
+                if (videoList.size < resultLimit) {
                     searchActionCreator.searchData(query, youtubePageToken)
                 }
             }
