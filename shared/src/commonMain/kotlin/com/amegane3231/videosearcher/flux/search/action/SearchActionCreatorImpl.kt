@@ -25,7 +25,7 @@ class SearchActionCreatorImpl : SearchActionCreator, CoroutineScope, KoinCompone
                     dispatcher.dispatch(SearchAction.FetchDataFailed(it))
                 }
                 .collect {
-                    dispatcher.dispatch(SearchAction.FetchYoutubeDataSucceeded(it))
+                    dispatcher.dispatch(SearchAction.FetchDataSucceeded(it))
                 }
         }
     }

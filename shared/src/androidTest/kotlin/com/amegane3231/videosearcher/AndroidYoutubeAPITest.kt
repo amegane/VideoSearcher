@@ -228,13 +228,13 @@ class AndroidYoutubeAPITest {
             }
             io {
                 flow.collect {
-                    Dispatcher.dispatch(SearchAction.FetchYoutubeDataSucceeded(it))
+                    Dispatcher.dispatch(SearchAction.FetchDataSucceeded(it))
                 }
             }
         }
 
         creator.searchData("TEST")
-        assertTrue { store.youtubeData.value.instanceOf(SearchAction.FetchYoutubeDataSucceeded::class) }
+        assertTrue { store.videoList.value.instanceOf(SearchAction.FetchDataSucceeded::class) }
     }
 
     private fun io(block: suspend CoroutineScope.() -> Unit) =
