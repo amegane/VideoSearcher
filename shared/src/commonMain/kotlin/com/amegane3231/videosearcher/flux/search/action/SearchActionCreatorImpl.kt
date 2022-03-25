@@ -11,7 +11,7 @@ import org.koin.core.component.inject
 import kotlin.coroutines.CoroutineContext
 
 class SearchActionCreatorImpl : SearchActionCreator, CoroutineScope, KoinComponent {
-    private val dispatcher: Dispatcher by inject()
+    override val dispatcher: Dispatcher by inject()
 
     private val searchYoutubeUseCase: SearchYoutubeUseCase by inject()
 
