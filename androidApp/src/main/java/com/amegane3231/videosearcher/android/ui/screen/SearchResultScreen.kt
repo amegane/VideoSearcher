@@ -25,13 +25,13 @@ import com.google.accompanist.insets.statusBarsPadding
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun SearchResultScreen(store: SearchStore, query: String) {
-    val searchedYoutubeDataList by store.youtubeData.collectAsState()
+    val searchedYoutubeDataList by store.videoList.collectAsState()
 
     val youtubePageToken by store.youtubePageToken.collectAsState()
 
-    val youtubeSearchState by store.youtubeSearchState.collectAsState()
+    val youtubeSearchState by store.searchState.collectAsState()
 
-    val selectedYoutubeVideoDetail by store.selectedYoutubeVideoDetail.collectAsState()
+    val selectedYoutubeVideoDetail by store.selectedVideoDetail.collectAsState()
 
     val searchActionCreator: SearchActionCreator = getKoinInstance()
 
@@ -70,7 +70,7 @@ fun SearchResultScreen(store: SearchStore, query: String) {
                 CircularProgressIndicator()
             }
         }
-        is SearchAction.FetchYoutubeDataSucceeded -> {
+        is SearchAction.FetchDataSucceeded -> {
             VideoDetailContent(
                 searchResults = searchedYoutubeDataList,
                 videoDetail = selectedYoutubeVideoDetail

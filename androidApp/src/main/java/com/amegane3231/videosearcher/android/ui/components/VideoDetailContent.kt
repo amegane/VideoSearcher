@@ -16,7 +16,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.amegane3231.videosearcher.data.video.youtube.YoutubeVideoResource
+import com.amegane3231.videosearcher.data.video.common.CommonVideoDetail
 import com.amegane3231.videosearcher.di.getKoinInstance
 import com.amegane3231.videosearcher.flux.search.action.GetVideoDataAction
 import com.amegane3231.videosearcher.flux.search.action.GetVideoDataActionCreator
@@ -27,7 +27,7 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun VideoDetailContent(
-    searchResults: List<YoutubeVideoResource>,
+    searchResults: List<CommonVideoDetail>,
     videoDetail: GetVideoDataAction,
     onAppearLastItem: () -> Unit
 ) {
@@ -51,7 +51,7 @@ fun VideoDetailContent(
             searchResults = searchResults,
             onClick = {
                 val getVideoDataActionCreator: GetVideoDataActionCreator = getKoinInstance()
-                getVideoDataActionCreator.getYoutubeVideoData(searchResults[it].id.videoId)
+                getVideoDataActionCreator.getYoutubeVideoData(searchResults[it].videoId)
                 selectedIndex = it
                 scope.launch { sheetState.show() }
             },

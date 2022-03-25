@@ -68,16 +68,16 @@ fun VideoDetailBottomSheetContent(getVideoDataState: GetVideoDataAction) {
                 CircularProgressIndicator()
             }
         }
-        is GetVideoDataAction.FetchYoutubeDataSucceeded -> {
-            val videoDetail = getVideoDataState.data.items[0]
+        is GetVideoDataAction.FetchDataSucceeded -> {
+            val videoDetail = getVideoDataState.data.videoDetailList[0]
 
-            val videoId = videoDetail.id
+            val videoId = videoDetail.videoId
 
-            val title = videoDetail.snippet.title
+            val title = videoDetail.title
 
-            val detail = videoDetail.snippet.description
+            val detail = videoDetail.description
 
-            val imageUrl = videoDetail.snippet.thumbnails.high.url
+            val imageUrl = videoDetail.imageUrl
 
             val annotatedString = buildAnnotatedString {
                 val link = "https://www.youtube.com/watch?v=$videoId"

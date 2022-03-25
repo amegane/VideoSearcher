@@ -1,7 +1,7 @@
 package com.amegane3231.videosearcher.flux.search.store
 
 import androidx.lifecycle.ViewModel
-import com.amegane3231.videosearcher.data.video.youtube.YoutubeVideoResource
+import com.amegane3231.videosearcher.data.video.common.CommonVideoDetail
 import com.amegane3231.videosearcher.flux.core.Dispatcher
 import com.amegane3231.videosearcher.flux.search.action.ClearAction
 import com.amegane3231.videosearcher.flux.search.action.GetVideoDataAction
@@ -20,10 +20,10 @@ import kotlin.coroutines.CoroutineContext
 actual class SearchStoreImpl : SearchStore, ViewModel(), CoroutineScope, KoinComponent {
     actual override val dispatcher: Dispatcher by inject()
 
-    private val _youtubeData: MutableStateFlow<List<YoutubeVideoResource>> =
+    private val _youtubeData: MutableStateFlow<List<CommonVideoDetail>> =
         MutableStateFlow(listOf())
 
-    actual override val youtubeData: StateFlow<List<YoutubeVideoResource>> = _youtubeData
+    actual override val videoList: StateFlow<List<CommonVideoDetail>> = _youtubeData
 
     private val _youtubePageToken: MutableStateFlow<String> = MutableStateFlow("")
 
@@ -32,12 +32,12 @@ actual class SearchStoreImpl : SearchStore, ViewModel(), CoroutineScope, KoinCom
     private val _youtubeSearchState: MutableStateFlow<SearchAction> =
         MutableStateFlow(SearchAction.Standby())
 
-    actual override val youtubeSearchState: StateFlow<SearchAction> = _youtubeSearchState
+    actual override val searchState: StateFlow<SearchAction> = _youtubeSearchState
 
     private val _selectedYoutubeVideoDetail: MutableStateFlow<GetVideoDataAction> =
         MutableStateFlow(GetVideoDataAction.Standby())
 
-    actual override val selectedYoutubeVideoDetail: StateFlow<GetVideoDataAction> =
+    actual override val selectedVideoDetail: StateFlow<GetVideoDataAction> =
         _selectedYoutubeVideoDetail
 
     override val coroutineContext: CoroutineContext = Dispatchers.IO + Job()
@@ -55,9 +55,9 @@ actual class SearchStoreImpl : SearchStore, ViewModel(), CoroutineScope, KoinCom
                 onNext = {
                     launch {
                         _youtubeSearchState.emit(it)
-                        if (it is SearchAction.FetchYoutubeDataSucceeded) {
+                        if (it is SearchAction.FetchDataSucceeded) {
                             val current = _youtubeData.value
-                            _youtubeData.emit(current + it.data.items)
+                            _youtubeData.emit(current + it.data.videoDetailList)
                             _youtubePageToken.emit(it.data.nextPageToken)
                         }
                     }

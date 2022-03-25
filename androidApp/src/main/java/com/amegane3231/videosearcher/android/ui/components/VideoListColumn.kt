@@ -15,12 +15,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
-import com.amegane3231.videosearcher.data.video.youtube.YoutubeVideoResource
+import com.amegane3231.videosearcher.data.video.common.CommonVideoDetail
 import kotlinx.coroutines.flow.collectLatest
 
 @Composable
 fun VideoListColumn(
-    searchResults: List<YoutubeVideoResource>,
+    searchResults: List<CommonVideoDetail>,
     onClick: (Int) -> Unit,
     onAppearLastItem: () -> Unit,
     modifier: Modifier = Modifier
@@ -50,8 +50,8 @@ fun VideoListColumn(
     ) {
         itemsIndexed(searchResults) { index, video ->
             VideoOverviewRow(
-                imageUrl = video.snippet.thumbnails.medium.url,
-                videoTitle = video.snippet.title,
+                imageUrl = video.imageUrl,
+                videoTitle = video.title,
                 modifier = Modifier
                     .fillMaxWidth()
                     .clickable {

@@ -27,7 +27,7 @@ class GetVideoDataActionCreatorImpl : GetVideoDataActionCreator, CoroutineScope,
                     dispatcher.dispatch(GetVideoDataAction.FetchDataFailed(it))
                 }
                 .collect {
-                    dispatcher.dispatch(GetVideoDataAction.FetchYoutubeDataSucceeded(it))
+                    dispatcher.dispatch(GetVideoDataAction.FetchDataSucceeded(it))
                 }
         }
     }
