@@ -7,7 +7,6 @@ import com.amegane3231.videosearcher.flux.search.action.SearchAction
 import com.amegane3231.videosearcher.flux.search.action.SearchActionCreator
 import com.amegane3231.videosearcher.flux.search.store.SearchStore
 import com.badoo.reaktive.observable.subscribe
-import io.ktor.util.reflect.instanceOf
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.mockkObject
@@ -57,7 +56,7 @@ class SearchStoreTest {
 
         creator.searchData("TEST", "")
         verify(exactly = 1) { creator.searchData("TEST", "") }
-        assertTrue { store.searchState.value.instanceOf(SearchAction.FetchDataSucceeded::class) }
+        assertTrue { store.searchState.value is SearchAction.FetchDataSucceeded }
     }
 
     @Test
@@ -91,7 +90,7 @@ class SearchStoreTest {
 
         creator.searchData("TEST", "")
         verify(exactly = 1) { creator.searchData("TEST", "") }
-        assertTrue { store.searchState.value.instanceOf(SearchAction.FetchDataFailed::class) }
+        assertTrue { store.searchState.value is SearchAction.FetchDataFailed }
     }
 
     @Test
@@ -135,7 +134,7 @@ class SearchStoreTest {
 
         creator.searchData("TEST", "")
         verify(exactly = 1) { creator.searchData("TEST", "") }
-        assertTrue { store.searchState.value.instanceOf(SearchAction.FetchDataWaiting::class) }
+        assertTrue { store.searchState.value is SearchAction.FetchDataWaiting }
     }
 
     @Test
@@ -151,7 +150,7 @@ class SearchStoreTest {
         val _searchState = MutableStateFlow<SearchAction>(SearchAction.Standby())
         every { store.searchState } answers { _searchState }
 
-        assertTrue { store.searchState.value.instanceOf(SearchAction.Standby::class) }
+        assertTrue { store.searchState.value is SearchAction.Standby }
     }
 
     private fun io(block: suspend CoroutineScope.() -> Unit) =
