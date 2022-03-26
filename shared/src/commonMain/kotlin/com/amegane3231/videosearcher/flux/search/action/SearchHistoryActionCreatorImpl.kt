@@ -12,7 +12,7 @@ import org.koin.core.component.inject
 import kotlin.coroutines.CoroutineContext
 
 class SearchHistoryActionCreatorImpl : SearchHistoryActionCreator, CoroutineScope, KoinComponent {
-    private val dispatcher: Dispatcher by inject()
+    override val dispatcher: Dispatcher by inject()
 
     private val insertSearchHistoryUseCase: InsertSearchHistoryUseCase by inject()
 
